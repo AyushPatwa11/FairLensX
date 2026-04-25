@@ -1,0 +1,10 @@
+fastapi==0.111.0
+uvicorn==0.30.1
+python-multipart==0.0.9
+pandas==2.2.2
+scikit-learn==1.4.2
+fairlearn==0.10.0
+langchain>=0.2.0
+langchain-google-genai>=1.0.0
+langgraph>=0.1.0
+python-dotenv>=1.0.0

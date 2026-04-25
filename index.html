@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairLens AI - Intelligent Bias Detection</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="ph-fill ph-aperture"></i>
+                    <span>FairLens <span class="accent">AI</span></span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="dashboard">
+                    <i class="ph ph-squares-four"></i> Dashboard
+                </button>
+                <div class="nav-category">Tools</div>
+                <button class="nav-item" data-target="dataset-analyzer">
+                    <i class="ph ph-table"></i> Dataset Analyzer
+                </button>
+                <button class="nav-item" data-target="jd-scanner">
+                    <i class="ph ph-file-text"></i> JD Scanner
+                </button>
+                <button class="nav-item" data-target="profile-simulator">
+                    <i class="ph ph-users"></i> Profile Simulator
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="User" class="avatar">
+                    <div class="user-info">
+                        <span class="user-name">Demo User</span>
+                        <span class="user-role">Compliance Officer</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-outline"><i class="ph ph-download-simple"></i> Export PDF Report</button>
+                    <button class="btn btn-icon"><i class="ph ph-bell"></i><span class="badge"></span></button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                
+                <!-- Dashboard View -->
+                <section id="dashboard" class="view-section active">
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3>Overall System Bias</h3>
+                                <div class="icon-wrapper bg-warning"><i class="ph ph-warning-circle"></i></div>
+                            </div>
+                            <div class="stat-value">28<span class="stat-unit">/100</span></div>
+                            <div class="stat-trend negative"><i class="ph ph-trend-up"></i> +4% from last month</div>
+                            <div class="stat-desc">Moderate risk detected across active models.</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3>Datasets Analyzed</h3>
+                                <div class="icon-wrapper bg-primary"><i class="ph ph-database"></i></div>
+                            </div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-trend positive"><i class="ph ph-trend-up"></i> +2 this week</div>
+                            <div class="stat-desc">Latest: Q3_Hiring_Data.csv</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <h3>JDs Scanned (30d)</h3>
+                                <div class="icon-wrapper bg-success"><i class="ph ph-file-magnifying-glass"></i></div>
+                            </div>
+                            <div class="stat-value">45</div>
+                            <div class="stat-trend positive"><i class="ph ph-check-circle"></i> 82% Fair</div>
+                            <div class="stat-desc">Average bias score: 14/100 (Low Risk)</div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div class="action-cards">
+                            <div class="action-card" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">
+                                <i class="ph-duotone ph-upload-simple"></i>
+                                <h4>New Dataset Analysis</h4>
+                                <p>Upload a CSV to evaluate model fairness metrics.</p>
+                            </div>
+                            <div class="action-card" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">
+                                <i class="ph-duotone ph-text-aa"></i>
+                                <h4>Scan Job Description</h4>
+                                <p>Detect hidden bias in your hiring material.</p>
+                            </div>
+                            <div class="action-card" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">
+                                <i class="ph-duotone ph-git-diff"></i>
+                                <h4>Simulate Counterfactuals</h4>
+                                <p>Test individual profiles against decision models.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dataset Analyzer View -->
+                <section id="dataset-analyzer" class="view-section">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>1. Upload Dataset</h2>
+                            <p>Upload a structured CSV file to detect bias and measure fairness metrics.</p>
+                        </div>
+                        <div class="upload-zone" id="csv-upload">
+                            <i class="ph ph-cloud-arrow-up"></i>
+                            <h3>Drag & Drop your CSV file here</h3>
+                            <p>or click to browse (Simulated)</p>
+                            <input type="file" id="csv-file-input" hidden accept=".csv">
+                            <button class="btn btn-primary mt-4" onclick="document.getElementById('csv-file-input').click()">Browse Files</button>
+                        </div>
+                    </div>
+
+                    <div id="dataset-results" class="results-container hidden">
+                        <div class="mapping-section panel">
+                            <h2>2. Column Mapping</h2>
+                            <div class="mapping-grid">
+                                <div class="form-group">
+                                    <label>Target / Outcome Variable</label>
+                                    <select class="form-control" id="target-map">
+                                        <option value="Hired">Hired (1/0)</option>
+                                        <option value="Loan_Approved">Loan_Approved</option>
+                                        <option value="Admitted">Admitted</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sensitive Attributes</label>
+                                    <select class="form-control" id="sensitive-map" multiple>
+                                        <option value="Gender" selected>Gender</option>
+                                        <option value="Age" selected>Age</option>
+                                        <option value="Race">Race</option>
+                                        <option value="Zip_Code">Zip_Code</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="run-analysis-btn">Run Fairness Analysis</button>
+                        </div>
+
+                        <div id="analysis-dashboard" class="hidden">
+                            <hr class="divider">
+                            <div class="results-header">
+                                <h2>Analysis Results</h2>
+                                <span class="badge badge-warning">High Bias Detected</span>
+                            </div>
+                            
+                            <div class="dashboard-grid two-col">
+                                <div class="stat-card">
+                                    <h3 class="mb-2">Overall Bias Score</h3>
+                                    <div class="score-display">
+                                        <div class="score-circle score-high">74</div>
+                                        <div class="score-details">
+                                            <p>Scale: 0 (Fair) to 100 (Unfair)</p>
+                                            <strong>Significant disparate impact found on attribute: Gender.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <h3 class="mb-2">Demographic Parity Ratio</h3>
+                                    <div class="chart-mockup">
+                                        <div class="bar-row">
+                                            <span>Male</span>
+                                            <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+                                            <span>85% Selection</span>
+                                        </div>
+                                        <div class="bar-row mt-2">
+                                            <span>Female</span>
+                                            <div class="bar-track"><div class="bar-fill" style="width: 32%; background: var(--danger-color);"></div></div>
+                                            <span style="color: var(--danger-color);">32% Selection</span>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 text-sm text-muted">Rule of thumb: Ratio should be > 80% (Currently ~37%).</p>
+                                </div>
+                            </div>
+
+                            <div class="panel mitigation-panel mt-4">
+                                <h2>3. Mitigation Strategies</h2>
+                                <p>Apply mitigation techniques to improve fairness without sacrificing much accuracy.</p>
+                                <div class="mitigation-options">
+                                    <div class="mitigation-card">
+                                        <h4>Reweighing</h4>
+                                        <p>Assigns different weights to examples based on their sensitive attribute to balance the training data.</p>
+                                        <button class="btn btn-outline sm" id="apply-mitigation-btn">Apply & Re-evaluate</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="post-mitigation" class="dashboard-grid two-col hidden mt-4">
+                                <div class="stat-card border-success">
+                                    <h3 class="mb-2">New Bias Score</h3>
+                                    <div class="score-display">
+                                        <div class="score-circle score-low">18</div>
+                                        <div class="score-details">
+                                            <p>Reduced by 56 points</p>
+                                            <strong class="text-success"><i class="ph ph-check-circle"></i> Fairness Achieved.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stat-card border-success">
+                                    <h3 class="mb-2">Demographic Parity (Post)</h3>
+                                    <div class="chart-mockup">
+                                        <div class="bar-row">
+                                            <span>Male</span>
+                                            <div class="bar-track"><div class="bar-fill" style="width: 78%;"></div></div>
+                                            <span>78%</span>
+                                        </div>
+                                        <div class="bar-row mt-2">
+                                            <span>Female</span>
+                                            <div class="bar-track"><div class="bar-fill" style="width: 72%;"></div></div>
+                                            <span>72%</span>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3 text-sm text-muted">Ratio: 92% (Passes 80% rule).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- JD Scanner View -->
+                <section id="jd-scanner" class="view-section">
+                    <div class="dashboard-grid mb-4">
+                        <div class="panel" style="grid-column: span 2;">
+                            <div class="panel-header">
+                                <h2>Job Description Scanner</h2>
+                                <p>Paste job description text to identify and rewrite exclusionary or biased language.</p>
+                            </div>
+                            <div class="form-group mt-3">
+                                <textarea id="jd-input" class="form-control" rows="8" placeholder="Paste job description here... E.g., We are looking for aggressive, rockstar developers to dominate the market..."></textarea>
+                            </div>
+                            <button class="btn btn-primary w-100" id="scan-jd-btn"><i class="ph ph-magnifying-glass"></i> Scan Document</button>
+                        </div>
+                        <div class="panel" id="jd-summary-panel">
+                            <h2>Scan Summary</h2>
+                            <div class="score-display mt-4">
+                                <div class="score-circle" id="jd-score-circle">--</div>
+                                <div class="score-details">
+                                    <p>Bias Score</p>
+                                    <strong id="jd-risk-level">Awaiting Scan</strong>
+                                </div>
+                            </div>
+                            <ul class="bias-breakdown mt-4">
+                                <li>Gender Bias: <span id="gb-count">0</span></li>
+                                <li>Age Bias: <span id="ab-count">0</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="jd-results" class="panel hidden">
+                        <h2>Detected Issues & Suggestions</h2>
+                        <div class="jd-result-container">
+                            <div class="jd-highlighted-text" id="jd-output">
+                                <!-- Text will be inserted here -->
+                            </div>
+                            <div class="jd-suggestions">
+                                <h3>Actionable Insights</h3>
+                                <div id="suggestions-list" class="suggestions-list">
+                                    <!-- Suggestions will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Simulator View -->
+                <section id="profile-simulator" class="view-section">
+                    <div class="panel mb-4">
+                        <div class="panel-header">
+                            <h2>Individual Bias Simulator</h2>
+                            <p>Enter an individual profile to see how a model's prediction changes through counterfactual analysis (changing a single sensitive attribute).</p>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid two-col">
+                        <div class="panel">
+                            <h3>Profile Details</h3>
+                            <form id="simulator-form" class="mt-4">
+                                <div class="form-group">
+                                    <label>Scenario</label>
+                                    <select class="form-control">
+                                        <option>Hiring Algorithm</option>
+                                        <option>Loan Approval</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Years of Experience</label>
+                                        <input type="number" id="sim-experience" class="form-control" value="4">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Education Level</label>
+                                        <select id="sim-education" class="form-control">
+                                            <option>Bachelors</option>
+                                            <option>Masters</option>
+                                            <option>PhD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr class="divider">
+                                <h4>Sensitive Attributes</h4>
+                                <div class="form-row mt-3">
+                                    <div class="form-group">
+                                        <label>Gender (Original)</label>
+                                        <select class="form-control" id="sim-gender">
+                                            <option value="Female">Female</option>
+                                            <option value="Male">Male</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Counterfactual Gender</label>
+                                        <select class="form-control" id="sim-gender-cf">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Age group (Original)</label>
+                                        <select class="form-control">
+                                            <option>> 50</option>
+                                            <option>< 30</option>
+                                            <option>30-50</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary mt-2" id="simulate-btn">Run Simulation</button>
+                            </form>
+                        </div>
+
+                        <div class="panel" id="simulator-results">
+                            <h3 style="opacity: 0.5;">Results will appear here</h3>
+                            <div id="sim-results-cards" class="hidden mt-4">
+                                <div class="cf-comparison">
+                                    <div class="cf-card original">
+                                        <div class="cf-header">Original Profile</div>
+                                        <div class="cf-sub">Gender: <span id="res-orig-gender">Female</span></div>
+                                        <div class="cf-score">34%</div>
+                                        <div class="cf-desc">Approval Probability</div>
+                                    </div>
+                                    <div class="cf-vs"><i class="ph ph-arrows-left-right"></i></div>
+                                    <div class="cf-card counterfactual">
+                                        <div class="cf-header">Counterfactual</div>
+                                        <div class="cf-sub">Gender: <span id="res-cf-gender">Male</span></div>
+                                        <div class="cf-score text-primary">78%</div>
+                                        <div class="cf-desc">Approval Probability</div>
+                                    </div>
+                                </div>
+                                <div class="bias-impact-alert mt-4">
+                                    <div class="alert alert-danger">
+                                        <i class="ph ph-warning"></i>
+                                        <div>
+                                            <strong>Severe Bias Impact Detected</strong>
+                                            <p>Changing the profile's gender from <span id="exp-orig">Female</span> to <span id="exp-cf">Male</span> while keeping all other qualifications identical resulted in a <strong>+44%</strong> increase in approval probability.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-widget">
+        <button id="chatbot-toggle" class="btn btn-primary btn-icon chatbot-fab">
+            <i class="ph ph-chat-teardrop-text"></i>
+        </button>
+        <div id="chatbot-panel" class="chatbot-panel hidden">
+            <div class="chatbot-header">
+                <h3>FairLens AI Assistant</h3>
+                <button id="chatbot-close" class="btn-icon"><i class="ph ph-x"></i></button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages">
+                <div class="message ai">Hello! I am your FairLens AI assistant powered by LangChain and LangGraph. Ask me about bias mitigation, your dataset scores, or how to write inclusive job descriptions!</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-field" class="form-control" placeholder="Ask AI..." />
+                <button id="chatbot-send" class="btn btn-primary btn-icon"><i class="ph ph-paper-plane-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
