@@ -22,6 +22,9 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
         if target not in df.columns:
             return {"success": False, "error": f"Target column '{target}' not found in dataset."}
             
+        # Drop rows with missing target values
+        df = df.dropna(subset=[target])
+            
         # 2. Data & column mapping (auto-detect usable features)
         preferred_features = ["Experience", "Education", "Gender", "Age"]
         expected_features = [f for f in preferred_features if f in df.columns and f != target]
@@ -38,10 +41,23 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
         categorical_features = [c for c in expected_features if X[c].dtype == "object"]
         numeric_features = [c for c in expected_features if c not in categorical_features]
 
+        from sklearn.impute import SimpleImputer
+        from sklearn.pipeline import Pipeline
+
+        num_pipeline = Pipeline(steps=[
+            ("imputer", SimpleImputer(strategy="mean")),
+            ("scaler", StandardScaler())
+        ])
+
+        cat_pipeline = Pipeline(steps=[
+            ("imputer", SimpleImputer(strategy="most_frequent")),
+            ("ohe", OneHotEncoder(handle_unknown="ignore"))
+        ])
+
         preprocessor = ColumnTransformer(
             transformers=[
-                ("num", StandardScaler(), numeric_features),
-                ("cat", OneHotEncoder(handle_unknown="ignore"), categorical_features)
+                ("num", num_pipeline, numeric_features),
+                ("cat", cat_pipeline, categorical_features)
             ],
             remainder="drop"
         )
@@ -70,7 +86,7 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
                 rates = {}
                 for group_value in groups.dropna().unique():
                     mask = groups == group_value
-                    rates[str(group_value)] = round(float(selection_rate(y_pred[mask])), 3)
+                    rates[str(group_value)] = round(float(selection_rate(y_true=y[mask], y_pred=y_pred[mask])), 3)
                 group_metrics.append({
                     "attribute": sensitive_feature,
                     "demographic_parity_difference": round(float(dpd), 3),
