@@ -1,0 +1,1001 @@
+Experience,Education,Gender,Age,Hired
+6,Bachelors,Male,30-50,0
+3,Bachelors,Male,30-50,1
+12,Bachelors,Female,30-50,0
+14,Masters,Male,30-50,1
+10,Masters,Female,< 30,1
+7,Bachelors,Male,< 30,0
+12,Bachelors,Male,30-50,1
+4,Bachelors,Female,< 30,0
+6,Bachelors,Male,30-50,1
+9,Bachelors,Female,< 30,0
+2,Masters,Male,< 30,1
+6,Bachelors,Male,30-50,1
+10,Masters,Female,30-50,1
+10,PhD,Female,30-50,1
+7,Bachelors,Female,30-50,1
+4,Masters,Female,< 30,1
+3,Bachelors,Female,< 30,0
+7,Bachelors,Male,30-50,1
+7,Bachelors,Male,30-50,1
+2,Masters,Female,< 30,0
+5,Masters,Female,30-50,0
+4,Masters,Female,< 30,1
+1,PhD,Male,30-50,1
+7,Masters,Male,< 30,1
+11,PhD,Female,30-50,1
+13,Masters,Female,30-50,1
+5,Masters,Female,< 30,1
+1,Bachelors,Female,30-50,0
+11,Bachelors,Female,30-50,0
+4,Masters,Male,< 30,1
+0,Bachelors,Male,< 30,1
+11,Bachelors,Male,< 30,1
+9,PhD,Male,< 30,1
+5,Bachelors,Female,30-50,0
+12,Bachelors,Male,30-50,1
+11,Masters,Female,30-50,0
+8,Masters,Male,< 30,1
+0,Bachelors,Male,< 30,1
+10,Masters,Male,< 30,1
+10,Masters,Male,30-50,1
+14,Bachelors,Female,30-50,1
+9,Bachelors,Male,< 30,1
+11,Masters,Female,30-50,1
+11,Bachelors,Male,30-50,1
+14,Bachelors,Male,30-50,1
+13,Bachelors,Male,30-50,1
+13,Bachelors,Female,30-50,1
+14,Bachelors,Female,30-50,1
+13,Bachelors,Male,30-50,1
+2,Bachelors,Male,30-50,0
+11,Bachelors,Female,< 30,0
+6,Masters,Male,< 30,1
+3,Bachelors,Male,< 30,1
+8,Masters,Female,30-50,1
+2,Bachelors,Female,< 30,0
+4,Masters,Male,> 50,1
+2,Bachelors,Female,30-50,0
+6,PhD,Female,30-50,0
+4,Masters,Male,< 30,1
+8,Bachelors,Female,30-50,0
+6,Masters,Female,30-50,1
+1,Bachelors,Male,30-50,1
+3,Bachelors,Male,< 30,0
+8,Bachelors,Male,30-50,1
+11,Bachelors,Female,< 30,0
+13,Bachelors,Male,< 30,1
+1,Bachelors,Female,30-50,0
+9,Masters,Female,30-50,0
+8,Bachelors,Male,30-50,1
+9,Bachelors,Female,30-50,1
+4,Bachelors,Male,30-50,1
+1,Bachelors,Female,30-50,0
+3,Bachelors,Female,< 30,1
+11,Masters,Male,> 50,1
+14,Bachelors,Male,< 30,1
+11,Bachelors,Male,> 50,1
+6,Bachelors,Male,30-50,1
+11,Bachelors,Male,< 30,1
+12,Masters,Male,30-50,1
+7,Bachelors,Female,30-50,1
+14,Bachelors,Male,30-50,1
+2,PhD,Male,> 50,1
+13,Bachelors,Female,> 50,1
+0,PhD,Male,30-50,1
+3,Bachelors,Female,< 30,0
+1,Masters,Female,> 50,0
+7,Bachelors,Female,30-50,0
+3,Masters,Male,< 30,1
+1,Bachelors,Male,< 30,1
+13,Bachelors,Male,30-50,1
+5,Bachelors,Female,> 50,0
+5,Masters,Male,30-50,1
+9,Masters,Male,30-50,1
+3,Masters,Female,< 30,1
+5,Bachelors,Male,< 30,1
+12,Masters,Male,30-50,1
+14,Bachelors,Male,< 30,1
+1,Bachelors,Female,< 30,1
+9,Bachelors,Male,< 30,1
+11,Masters,Female,30-50,1
+1,Bachelors,Female,> 50,1
+9,Bachelors,Male,< 30,1
+13,Masters,Female,30-50,1
+3,Bachelors,Male,30-50,1
+13,Bachelors,Male,> 50,1
+14,Bachelors,Female,< 30,1
+14,Bachelors,Female,30-50,1
+7,Bachelors,Female,< 30,0
+13,Bachelors,Female,30-50,1
+6,Masters,Male,30-50,1
+11,Bachelors,Male,< 30,1
+8,Bachelors,Male,30-50,1
+13,Masters,Male,30-50,1
+7,Bachelors,Male,< 30,1
+4,Bachelors,Male,30-50,1
+12,Bachelors,Male,< 30,1
+1,Bachelors,Male,30-50,1
+14,Bachelors,Female,30-50,1
+4,Masters,Female,30-50,1
+7,Masters,Male,< 30,1
+9,Bachelors,Female,30-50,1
+8,Bachelors,Female,30-50,0
+11,Bachelors,Male,30-50,1
+11,PhD,Female,30-50,1
+11,Bachelors,Female,30-50,1
+12,Bachelors,Female,< 30,0
+8,Bachelors,Male,< 30,1
+12,Bachelors,Female,> 50,0
+14,Masters,Male,< 30,1
+12,Bachelors,Female,30-50,1
+0,Masters,Female,> 50,0
+8,Bachelors,Female,< 30,1
+6,Masters,Female,30-50,1
+8,Bachelors,Female,30-50,0
+7,Bachelors,Male,30-50,1
+0,Masters,Male,< 30,1
+11,PhD,Female,< 30,1
+7,Masters,Male,30-50,1
+7,Bachelors,Male,30-50,1
+14,PhD,Male,30-50,1
+10,Bachelors,Male,30-50,1
+2,PhD,Female,< 30,1
+0,Bachelors,Female,30-50,0
+7,Masters,Female,< 30,1
+2,Masters,Female,> 50,0
+2,Masters,Male,30-50,1
+0,Bachelors,Male,30-50,0
+10,Bachelors,Female,> 50,0
+4,Masters,Male,< 30,1
+9,Bachelors,Female,30-50,1
+6,PhD,Female,< 30,1
+9,Masters,Male,> 50,1
+8,Bachelors,Female,< 30,1
+11,Masters,Female,30-50,1
+6,Bachelors,Female,30-50,0
+8,Masters,Male,< 30,1
+7,Masters,Male,< 30,1
+11,Bachelors,Female,30-50,1
+1,Bachelors,Male,30-50,1
+0,PhD,Male,< 30,1
+6,Bachelors,Female,< 30,1
+6,Bachelors,Male,< 30,1
+13,Bachelors,Female,30-50,1
+7,Bachelors,Female,30-50,1
+4,Bachelors,Female,< 30,0
+2,Bachelors,Male,< 30,1
+11,Bachelors,Female,< 30,1
+7,Masters,Male,< 30,1
+5,Bachelors,Male,30-50,0
+10,Bachelors,Female,< 30,1
+2,Bachelors,Male,< 30,1
+0,Bachelors,Male,30-50,0
+2,Bachelors,Female,< 30,0
+4,Masters,Male,30-50,1
+14,Masters,Male,30-50,1
+13,Bachelors,Male,30-50,1
+2,Masters,Female,30-50,0
+0,Masters,Female,30-50,0
+4,Bachelors,Male,30-50,1
+9,PhD,Male,30-50,1
+6,PhD,Male,30-50,1
+14,Bachelors,Male,30-50,0
+13,Bachelors,Female,30-50,1
+6,PhD,Male,< 30,1
+10,Masters,Male,< 30,1
+8,Bachelors,Female,< 30,1
+14,Masters,Female,30-50,1
+14,Masters,Female,30-50,1
+9,Masters,Male,> 50,1
+9,Masters,Male,30-50,1
+11,Masters,Male,30-50,1
+12,Bachelors,Male,< 30,1
+2,Bachelors,Female,30-50,0
+14,Masters,Female,30-50,1
+6,PhD,Female,> 50,1
+0,Bachelors,Female,< 30,0
+3,Bachelors,Male,30-50,1
+12,Masters,Female,30-50,1
+3,Bachelors,Male,30-50,1
+13,Masters,Female,30-50,1
+4,Masters,Male,30-50,1
+6,Masters,Male,< 30,1
+6,Bachelors,Male,30-50,1
+12,Bachelors,Female,30-50,0
+14,Bachelors,Male,30-50,1
+10,Bachelors,Male,30-50,1
+12,Bachelors,Male,< 30,1
+3,Bachelors,Female,< 30,0
+12,Bachelors,Female,> 50,1
+6,Bachelors,Female,30-50,1
+10,Bachelors,Male,> 50,1
+2,Bachelors,Female,< 30,0
+5,Bachelors,Male,30-50,1
+11,Masters,Female,30-50,1
+1,Masters,Female,> 50,0
+9,Bachelors,Male,< 30,1
+12,Masters,Male,30-50,1
+13,Bachelors,Male,30-50,1
+8,Masters,Male,< 30,1
+4,Bachelors,Male,30-50,0
+5,PhD,Female,30-50,0
+11,Masters,Male,> 50,1
+11,Masters,Male,30-50,1
+11,Masters,Male,< 30,1
+11,Bachelors,Male,< 30,1
+3,Bachelors,Female,30-50,1
+13,Masters,Male,< 30,1
+13,Bachelors,Female,30-50,1
+10,Masters,Female,< 30,1
+9,Bachelors,Female,> 50,1
+6,Bachelors,Female,> 50,0
+11,Bachelors,Male,30-50,1
+8,Bachelors,Female,> 50,1
+6,Masters,Male,30-50,1
+13,Bachelors,Male,30-50,1
+0,Bachelors,Female,< 30,0
+0,Bachelors,Female,30-50,0
+8,Bachelors,Female,30-50,0
+10,Masters,Male,30-50,1
+13,Bachelors,Male,30-50,1
+8,Bachelors,Female,30-50,1
+3,Bachelors,Male,30-50,1
+12,Masters,Female,< 30,0
+8,Bachelors,Female,> 50,1
+2,Masters,Male,30-50,1
+6,PhD,Male,< 30,1
+5,Bachelors,Male,30-50,1
+7,Bachelors,Male,< 30,1
+10,Bachelors,Female,30-50,1
+8,Bachelors,Male,30-50,1
+13,Masters,Female,30-50,1
+4,PhD,Male,> 50,1
+0,Bachelors,Female,30-50,1
+2,Bachelors,Male,< 30,0
+9,Bachelors,Male,30-50,1
+11,Masters,Male,> 50,1
+7,Bachelors,Female,< 30,0
+14,Bachelors,Female,< 30,1
+10,PhD,Female,< 30,1
+5,Masters,Male,< 30,1
+7,Bachelors,Male,30-50,1
+8,Masters,Female,30-50,1
+3,Masters,Male,< 30,1
+0,Bachelors,Male,30-50,1
+13,Bachelors,Female,< 30,1
+0,Bachelors,Female,> 50,0
+9,Bachelors,Female,> 50,0
+3,Masters,Female,< 30,0
+11,PhD,Male,30-50,1
+13,Bachelors,Male,30-50,1
+6,Bachelors,Female,< 30,0
+1,Bachelors,Female,< 30,0
+2,Bachelors,Male,30-50,1
+0,Masters,Male,30-50,0
+4,Bachelors,Male,> 50,1
+0,Bachelors,Female,30-50,0
+7,Bachelors,Female,30-50,0
+0,Masters,Female,30-50,1
+10,Bachelors,Male,30-50,1
+0,Masters,Female,30-50,0
+1,Bachelors,Female,< 30,1
+1,Masters,Male,30-50,1
+11,Masters,Male,30-50,1
+5,Bachelors,Male,< 30,1
+6,Bachelors,Male,30-50,1
+4,Masters,Female,< 30,1
+0,PhD,Male,30-50,1
+0,Bachelors,Female,30-50,0
+2,Bachelors,Male,< 30,0
+13,PhD,Male,< 30,1
+1,Bachelors,Male,30-50,1
+4,Bachelors,Male,30-50,1
+11,PhD,Male,< 30,1
+9,Bachelors,Female,> 50,0
+5,Bachelors,Female,< 30,1
+6,Bachelors,Female,> 50,0
+3,Bachelors,Male,> 50,1
+6,Bachelors,Male,30-50,1
+10,Masters,Male,30-50,1
+7,Bachelors,Female,30-50,1
+10,Bachelors,Male,30-50,1
+0,Bachelors,Male,< 30,1
+14,Bachelors,Female,< 30,0
+5,PhD,Male,< 30,1
+7,Bachelors,Male,30-50,1
+4,Bachelors,Male,< 30,1
+3,Masters,Female,30-50,1
+1,Bachelors,Female,> 50,0
+5,Bachelors,Male,< 30,0
+5,Bachelors,Male,30-50,1
+10,Bachelors,Female,30-50,1
+14,Bachelors,Female,30-50,1
+0,Bachelors,Male,> 50,1
+8,Masters,Female,30-50,1
+11,Bachelors,Male,> 50,1
+10,Bachelors,Female,< 30,1
+5,Masters,Female,30-50,0
+12,Bachelors,Male,30-50,1
+2,Masters,Female,< 30,1
+3,Bachelors,Female,> 50,1
+11,Bachelors,Female,< 30,1
+10,Masters,Male,30-50,1
+3,Bachelors,Male,< 30,1
+2,Bachelors,Male,30-50,0
+9,Bachelors,Female,30-50,0
+2,Bachelors,Male,30-50,1
+14,Masters,Female,30-50,1
+2,Bachelors,Female,< 30,0
+3,Bachelors,Male,30-50,1
+6,Bachelors,Female,< 30,0
+3,Masters,Male,30-50,1
+8,Bachelors,Female,> 50,1
+0,Masters,Male,30-50,1
+7,Bachelors,Male,30-50,1
+6,Masters,Male,30-50,1
+1,PhD,Male,30-50,1
+7,Masters,Female,30-50,1
+0,Masters,Female,30-50,0
+10,Bachelors,Female,< 30,1
+11,Bachelors,Male,< 30,1
+8,Bachelors,Male,< 30,1
+8,Bachelors,Male,30-50,0
+1,Bachelors,Female,< 30,0
+6,Bachelors,Female,30-50,0
+14,Bachelors,Male,< 30,1
+13,Bachelors,Male,< 30,1
+9,Masters,Female,30-50,1
+2,Bachelors,Female,30-50,0
+6,Masters,Female,< 30,1
+11,Masters,Female,30-50,1
+9,PhD,Male,< 30,1
+8,Masters,Male,30-50,1
+3,Masters,Female,30-50,0
+11,PhD,Female,< 30,1
+0,PhD,Male,30-50,1
+1,Bachelors,Female,30-50,0
+0,Bachelors,Female,30-50,1
+13,Bachelors,Female,< 30,1
+11,Bachelors,Female,< 30,1
+4,Masters,Male,> 50,0
+4,Masters,Female,< 30,1
+10,Masters,Female,30-50,1
+6,Bachelors,Female,30-50,1
+8,Masters,Female,30-50,1
+8,Masters,Female,< 30,1
+2,Masters,Male,< 30,1
+2,PhD,Female,30-50,1
+2,Masters,Female,< 30,0
+3,Bachelors,Female,< 30,1
+7,Masters,Female,< 30,1
+5,Bachelors,Female,30-50,1
+7,Bachelors,Male,30-50,1
+0,Masters,Female,< 30,1
+7,Bachelors,Male,< 30,1
+3,Masters,Male,< 30,1
+10,Bachelors,Female,30-50,1
+0,Masters,Female,30-50,0
+7,Bachelors,Male,30-50,1
+3,PhD,Male,30-50,1
+5,Masters,Female,30-50,0
+7,Bachelors,Male,30-50,1
+3,Bachelors,Male,30-50,1
+13,PhD,Male,< 30,1
+2,Bachelors,Male,< 30,1
+13,Bachelors,Male,< 30,1
+8,Bachelors,Male,< 30,1
+2,Bachelors,Male,> 50,0
+8,Masters,Female,30-50,1
+12,Masters,Female,< 30,1
+1,Bachelors,Female,30-50,0
+13,Bachelors,Male,30-50,1
+1,Masters,Male,< 30,1
+1,Bachelors,Female,< 30,0
+5,Bachelors,Male,30-50,0
+2,PhD,Male,30-50,1
+12,Masters,Female,< 30,1
+8,Masters,Female,< 30,0
+3,Masters,Male,30-50,1
+0,Bachelors,Male,< 30,1
+3,Masters,Female,30-50,1
+0,Bachelors,Male,30-50,1
+13,Bachelors,Female,< 30,1
+4,Bachelors,Female,> 50,1
+3,Bachelors,Female,30-50,0
+7,Masters,Male,< 30,1
+7,Bachelors,Female,30-50,0
+6,Bachelors,Female,30-50,0
+2,Bachelors,Male,30-50,1
+0,Bachelors,Male,< 30,1
+0,Masters,Female,> 50,0
+11,Bachelors,Male,30-50,1
+10,Masters,Male,< 30,1
+2,Bachelors,Male,< 30,0
+5,Bachelors,Female,< 30,0
+6,Masters,Female,30-50,1
+5,Bachelors,Female,< 30,0
+13,Masters,Male,< 30,1
+13,Bachelors,Male,30-50,1
+5,Bachelors,Female,< 30,1
+5,PhD,Male,< 30,1
+12,Bachelors,Male,< 30,1
+2,Bachelors,Female,< 30,0
+5,Masters,Female,< 30,0
+7,Bachelors,Female,30-50,0
+10,Masters,Female,< 30,0
+10,Bachelors,Female,< 30,0
+1,PhD,Male,30-50,1
+4,Masters,Female,30-50,1
+13,Masters,Female,30-50,1
+0,PhD,Male,30-50,1
+11,Bachelors,Female,< 30,1
+14,PhD,Female,30-50,1
+0,Bachelors,Female,30-50,0
+4,Bachelors,Female,< 30,0
+11,Bachelors,Female,> 50,1
+12,Bachelors,Female,< 30,1
+2,Bachelors,Male,30-50,1
+3,Masters,Female,< 30,0
+2,Masters,Male,30-50,1
+0,PhD,Male,30-50,1
+0,Bachelors,Male,30-50,1
+11,Masters,Male,< 30,1
+11,Bachelors,Male,30-50,1
+13,Bachelors,Female,30-50,1
+12,Bachelors,Female,30-50,1
+13,Bachelors,Female,30-50,1
+4,Masters,Male,30-50,1
+5,Bachelors,Female,30-50,0
+2,Bachelors,Female,< 30,0
+11,Bachelors,Female,30-50,1
+8,Bachelors,Male,< 30,1
+4,Bachelors,Male,> 50,1
+7,PhD,Male,30-50,1
+12,Bachelors,Male,> 50,1
+0,Bachelors,Male,< 30,0
+13,Bachelors,Female,30-50,1
+4,Masters,Male,30-50,1
+14,PhD,Male,30-50,1
+2,Masters,Male,30-50,1
+11,Masters,Male,< 30,1
+0,Bachelors,Male,30-50,1
+3,Bachelors,Male,30-50,1
+14,PhD,Male,< 30,1
+12,Masters,Female,< 30,1
+4,Masters,Female,> 50,1
+6,Masters,Male,30-50,1
+0,Masters,Male,> 50,1
+2,Masters,Female,30-50,0
+1,PhD,Male,< 30,1
+8,PhD,Male,< 30,1
+9,Masters,Female,< 30,1
+14,Masters,Male,< 30,1
+5,Bachelors,Female,< 30,0
+9,Masters,Female,< 30,1
+2,Bachelors,Male,30-50,1
+7,Bachelors,Male,> 50,0
+13,PhD,Female,30-50,1
+7,Bachelors,Male,30-50,1
+1,Bachelors,Male,30-50,1
+14,Bachelors,Female,< 30,1
+5,Bachelors,Female,< 30,0
+6,Masters,Male,< 30,1
+1,Bachelors,Female,< 30,1
+14,Bachelors,Male,30-50,1
+10,Bachelors,Female,< 30,1
+9,Masters,Female,< 30,1
+1,Masters,Female,< 30,0
+9,Bachelors,Male,> 50,1
+0,Bachelors,Female,30-50,0
+7,Bachelors,Male,30-50,1
+0,Masters,Female,< 30,0
+8,Masters,Male,30-50,1
+10,Bachelors,Male,30-50,0
+5,Bachelors,Male,30-50,1
+6,Bachelors,Female,> 50,0
+12,Masters,Female,< 30,1
+9,Bachelors,Male,> 50,1
+6,Bachelors,Male,> 50,1
+9,Bachelors,Female,< 30,1
+2,Bachelors,Male,30-50,0
+1,Masters,Male,> 50,1
+8,Bachelors,Female,< 30,0
+7,Masters,Female,30-50,0
+12,Masters,Female,> 50,1
+11,Bachelors,Male,30-50,1
+9,Bachelors,Male,< 30,1
+6,Masters,Female,30-50,1
+8,Bachelors,Female,< 30,0
+3,Bachelors,Female,30-50,0
+12,PhD,Female,< 30,1
+3,Bachelors,Male,30-50,1
+0,Bachelors,Female,30-50,0
+7,Bachelors,Male,30-50,1
+13,PhD,Male,30-50,1
+13,Bachelors,Female,30-50,1
+11,Bachelors,Male,30-50,1
+2,Bachelors,Male,< 30,1
+6,Bachelors,Female,30-50,0
+14,Bachelors,Male,< 30,1
+11,Bachelors,Female,> 50,1
+1,Bachelors,Male,< 30,1
+1,Bachelors,Female,30-50,0
+6,Bachelors,Male,30-50,1
+14,Bachelors,Male,30-50,1
+5,Bachelors,Female,< 30,0
+2,Bachelors,Female,30-50,0
+8,Masters,Male,30-50,1
+9,Bachelors,Male,30-50,1
+14,Bachelors,Female,< 30,1
+13,Bachelors,Female,30-50,0
+12,Masters,Female,30-50,1
+5,Masters,Female,30-50,1
+9,Bachelors,Male,30-50,1
+9,Bachelors,Male,30-50,1
+5,PhD,Female,< 30,1
+0,Bachelors,Male,< 30,1
+3,Bachelors,Male,< 30,1
+9,Bachelors,Female,< 30,1
+5,Bachelors,Female,30-50,0
+14,PhD,Female,30-50,1
+5,Masters,Female,< 30,1
+10,Bachelors,Female,> 50,0
+11,Bachelors,Male,< 30,1
+4,PhD,Male,30-50,1
+0,Masters,Male,30-50,1
+7,Masters,Male,< 30,1
+4,PhD,Female,< 30,1
+11,PhD,Male,30-50,1
+11,Masters,Male,< 30,1
+11,Bachelors,Male,> 50,1
+4,Bachelors,Male,30-50,1
+6,Masters,Male,> 50,0
+3,Bachelors,Male,< 30,1
+5,Masters,Male,30-50,1
+12,Bachelors,Male,30-50,1
+3,Bachelors,Male,30-50,1
+13,Bachelors,Female,< 30,1
+14,Bachelors,Male,30-50,1
+2,PhD,Male,30-50,1
+6,Masters,Female,30-50,0
+7,Masters,Male,< 30,1
+3,Masters,Female,30-50,1
+12,Bachelors,Female,< 30,1
+1,Bachelors,Male,30-50,0
+11,Bachelors,Female,30-50,1
+9,Bachelors,Male,30-50,1
+13,Bachelors,Female,30-50,1
+2,Bachelors,Male,30-50,1
+0,Bachelors,Female,> 50,0
+7,PhD,Male,< 30,1
+14,Masters,Female,30-50,1
+2,Bachelors,Female,30-50,0
+11,Masters,Male,30-50,1
+9,Masters,Male,< 30,1
+6,Bachelors,Female,30-50,1
+9,Masters,Female,30-50,1
+4,Masters,Male,< 30,1
+9,Bachelors,Female,> 50,0
+4,Bachelors,Female,< 30,0
+13,Bachelors,Female,< 30,1
+6,Bachelors,Male,< 30,0
+14,Bachelors,Female,< 30,1
+8,Masters,Male,> 50,1
+11,Bachelors,Female,< 30,0
+4,Bachelors,Male,30-50,1
+0,PhD,Male,< 30,1
+9,Masters,Female,30-50,1
+9,Bachelors,Male,30-50,1
+0,Bachelors,Female,< 30,0
+14,Bachelors,Female,< 30,1
+1,Masters,Female,30-50,1
+13,Bachelors,Male,< 30,1
+5,Bachelors,Female,30-50,1
+8,PhD,Male,< 30,1
+7,Bachelors,Male,30-50,1
+12,Masters,Female,< 30,1
+4,PhD,Male,30-50,1
+0,Bachelors,Male,< 30,0
+12,Masters,Female,> 50,1
+6,Bachelors,Male,< 30,1
+14,PhD,Male,30-50,1
+4,Bachelors,Female,30-50,0
+5,Masters,Male,< 30,1
+12,Bachelors,Female,30-50,0
+6,Masters,Female,< 30,1
+2,Masters,Female,30-50,0
+11,Bachelors,Female,> 50,1
+9,Masters,Male,30-50,1
+2,Bachelors,Male,< 30,1
+4,Bachelors,Female,30-50,0
+5,Bachelors,Female,30-50,0
+8,Bachelors,Female,30-50,0
+12,Bachelors,Male,30-50,1
+13,PhD,Male,30-50,1
+11,Bachelors,Male,30-50,1
+4,Masters,Female,30-50,1
+14,Bachelors,Male,< 30,1
+0,Masters,Female,30-50,1
+13,PhD,Female,30-50,1
+13,Bachelors,Male,30-50,1
+13,Masters,Female,30-50,1
+3,Bachelors,Male,30-50,1
+4,Masters,Female,< 30,0
+11,Bachelors,Female,30-50,1
+9,PhD,Female,30-50,1
+9,Bachelors,Female,30-50,0
+4,Bachelors,Male,< 30,1
+6,Masters,Male,< 30,1
+3,Bachelors,Female,< 30,0
+0,Bachelors,Male,30-50,1
+13,Bachelors,Male,< 30,1
+13,Bachelors,Male,30-50,1
+4,Bachelors,Female,> 50,1
+6,Bachelors,Male,< 30,1
+9,Bachelors,Female,30-50,1
+9,Bachelors,Female,30-50,1
+5,Masters,Male,> 50,1
+4,Bachelors,Male,30-50,1
+3,Bachelors,Male,30-50,1
+1,Bachelors,Female,30-50,0
+3,Bachelors,Male,30-50,1
+14,Masters,Male,30-50,1
+9,Bachelors,Male,< 30,1
+9,Bachelors,Female,> 50,1
+2,Masters,Male,30-50,1
+9,Masters,Female,30-50,1
+0,Bachelors,Female,< 30,0
+7,Masters,Male,30-50,1
+4,PhD,Female,< 30,1
+12,Bachelors,Male,30-50,1
+3,Masters,Female,30-50,0
+7,Masters,Female,< 30,0
+6,Bachelors,Female,30-50,0
+1,Bachelors,Male,30-50,0
+0,Bachelors,Male,30-50,1
+11,Masters,Male,< 30,1
+10,PhD,Male,< 30,1
+3,Masters,Male,< 30,1
+7,Bachelors,Male,< 30,1
+11,Masters,Male,> 50,1
+1,Bachelors,Male,< 30,0
+2,Bachelors,Female,30-50,0
+11,Bachelors,Male,< 30,1
+0,Masters,Male,30-50,1
+0,Bachelors,Male,30-50,1
+12,Masters,Male,30-50,1
+2,Bachelors,Female,< 30,0
+10,Bachelors,Male,30-50,1
+4,Bachelors,Female,30-50,1
+11,Bachelors,Female,< 30,1
+2,PhD,Female,< 30,0
+0,Bachelors,Female,30-50,1
+0,Masters,Female,30-50,0
+7,Bachelors,Female,30-50,1
+9,Masters,Female,< 30,1
+10,Bachelors,Female,30-50,1
+11,Masters,Female,30-50,0
+12,Masters,Female,30-50,1
+12,Bachelors,Female,30-50,1
+11,Bachelors,Male,30-50,1
+14,Masters,Male,30-50,1
+13,PhD,Male,< 30,1
+1,Bachelors,Male,30-50,1
+12,Masters,Male,< 30,1
+2,PhD,Male,30-50,1
+1,Masters,Female,30-50,0
+2,PhD,Male,30-50,1
+6,Masters,Female,< 30,1
+0,Bachelors,Male,30-50,0
+9,Bachelors,Male,30-50,0
+7,Bachelors,Female,< 30,0
+12,Masters,Female,< 30,1
+9,Masters,Male,< 30,1
+9,Bachelors,Female,< 30,0
+9,Masters,Female,< 30,1
+13,Masters,Male,< 30,1
+1,Bachelors,Male,< 30,0
+2,Bachelors,Female,30-50,1
+8,Bachelors,Female,30-50,0
+6,Bachelors,Female,> 50,0
+3,Bachelors,Female,30-50,1
+9,Bachelors,Male,30-50,1
+4,Bachelors,Male,30-50,0
+1,Bachelors,Male,30-50,1
+12,Bachelors,Female,30-50,1
+10,Bachelors,Female,30-50,1
+12,Masters,Female,< 30,1
+7,Bachelors,Male,< 30,1
+3,PhD,Male,30-50,1
+8,PhD,Male,30-50,1
+4,Bachelors,Female,< 30,0
+12,Bachelors,Female,> 50,1
+8,Bachelors,Male,30-50,1
+3,Bachelors,Female,30-50,0
+9,Masters,Male,> 50,1
+4,Bachelors,Female,30-50,0
+8,Bachelors,Male,> 50,1
+7,Bachelors,Female,30-50,1
+2,Bachelors,Male,< 30,1
+0,Masters,Female,30-50,1
+2,Bachelors,Male,30-50,0
+3,Bachelors,Male,30-50,1
+1,Bachelors,Male,> 50,0
+0,PhD,Male,30-50,1
+6,Bachelors,Male,30-50,1
+7,Bachelors,Female,30-50,0
+6,Masters,Male,30-50,1
+13,Bachelors,Female,30-50,1
+4,PhD,Female,30-50,1
+11,Masters,Female,< 30,1
+0,Masters,Male,30-50,1
+6,Masters,Male,30-50,1
+12,PhD,Female,30-50,1
+6,PhD,Female,30-50,1
+8,Masters,Male,30-50,1
+2,Masters,Male,30-50,1
+8,Bachelors,Male,30-50,1
+13,Bachelors,Female,< 30,1
+0,Bachelors,Male,< 30,1
+0,Bachelors,Male,< 30,1
+13,Bachelors,Female,30-50,1
+3,Bachelors,Male,30-50,1
+8,Bachelors,Male,30-50,1
+5,Masters,Female,30-50,0
+12,PhD,Female,30-50,1
+10,Bachelors,Male,< 30,1
+2,Bachelors,Male,30-50,1
+0,Masters,Male,30-50,1
+3,Bachelors,Male,< 30,1
+11,Masters,Female,< 30,1
+12,Bachelors,Male,< 30,1
+8,Bachelors,Male,< 30,1
+2,PhD,Male,30-50,1
+11,Bachelors,Female,< 30,1
+8,Masters,Female,30-50,1
+6,Masters,Female,30-50,1
+11,Bachelors,Male,30-50,1
+13,Masters,Female,> 50,1
+14,PhD,Female,30-50,1
+3,Bachelors,Male,30-50,1
+2,Masters,Male,> 50,1
+9,Bachelors,Male,< 30,1
+14,Masters,Male,> 50,1
+4,Masters,Male,< 30,1
+4,Bachelors,Male,30-50,1
+2,PhD,Male,< 30,1
+11,PhD,Female,30-50,1
+8,Masters,Male,30-50,1
+3,Masters,Female,30-50,1
+10,Masters,Female,< 30,1
+4,Bachelors,Female,< 30,0
+3,Masters,Female,< 30,0
+4,Bachelors,Male,< 30,1
+6,Bachelors,Female,> 50,0
+8,Masters,Male,< 30,0
+6,Bachelors,Male,30-50,1
+12,Bachelors,Female,30-50,1
+4,Bachelors,Male,< 30,1
+9,Bachelors,Male,30-50,1
+9,Masters,Female,< 30,1
+6,Bachelors,Female,< 30,0
+13,Masters,Female,< 30,0
+14,Bachelors,Male,30-50,1
+9,Masters,Female,30-50,0
+4,Bachelors,Male,30-50,1
+2,Bachelors,Female,30-50,0
+6,Masters,Female,< 30,1
+12,Masters,Female,30-50,1
+10,Bachelors,Female,30-50,0
+10,Bachelors,Male,< 30,1
+1,Bachelors,Female,< 30,0
+14,Bachelors,Female,30-50,1
+11,Masters,Male,< 30,1
+8,Bachelors,Female,30-50,0
+9,Bachelors,Male,< 30,1
+9,Bachelors,Female,< 30,1
+11,Bachelors,Female,< 30,1
+0,Bachelors,Female,< 30,0
+12,Bachelors,Male,30-50,1
+5,Bachelors,Female,30-50,1
+6,Bachelors,Female,30-50,1
+13,Masters,Female,30-50,1
+12,Bachelors,Male,30-50,1
+7,PhD,Male,30-50,1
+9,Bachelors,Female,< 30,1
+8,Masters,Male,30-50,1
+1,Masters,Female,30-50,0
+10,Masters,Female,< 30,1
+9,Masters,Female,30-50,1
+1,Bachelors,Female,< 30,1
+4,Bachelors,Female,30-50,0
+12,Bachelors,Male,30-50,1
+4,Bachelors,Male,30-50,1
+5,Bachelors,Male,30-50,1
+2,Bachelors,Male,30-50,0
+7,Masters,Female,30-50,1
+12,Bachelors,Female,30-50,1
+0,Masters,Female,< 30,0
+5,Masters,Female,30-50,1
+3,PhD,Female,30-50,1
+0,Bachelors,Female,> 50,0
+14,Bachelors,Female,30-50,1
+6,Bachelors,Female,30-50,1
+8,Bachelors,Male,30-50,1
+12,Masters,Male,30-50,1
+3,Bachelors,Male,30-50,1
+3,Masters,Female,< 30,0
+5,Bachelors,Female,30-50,1
+11,Masters,Male,30-50,1
+14,Masters,Male,30-50,1
+2,Bachelors,Female,< 30,0
+12,Bachelors,Male,30-50,1
+11,Bachelors,Male,30-50,1
+5,Bachelors,Female,< 30,0
+6,Bachelors,Male,30-50,1
+10,Bachelors,Male,30-50,1
+9,Bachelors,Female,30-50,0
+9,Bachelors,Female,> 50,1
+2,Bachelors,Female,30-50,0
+6,Masters,Male,30-50,1
+13,Bachelors,Male,30-50,1
+2,Masters,Male,< 30,1
+12,Bachelors,Female,< 30,1
+12,Bachelors,Female,30-50,1
+1,Masters,Male,< 30,0
+11,Bachelors,Female,30-50,1
+13,Bachelors,Male,30-50,1
+9,Bachelors,Male,30-50,1
+3,Bachelors,Male,30-50,0
+11,Bachelors,Male,30-50,1
+7,Bachelors,Female,30-50,0
+12,Masters,Female,30-50,1
+14,Bachelors,Male,< 30,1
+8,Bachelors,Female,30-50,1
+6,Bachelors,Male,30-50,1
+0,Masters,Female,30-50,0
+2,Bachelors,Female,30-50,0
+12,Bachelors,Male,< 30,1
+11,Bachelors,Female,30-50,0
+13,PhD,Male,30-50,1
+8,Bachelors,Male,30-50,1
+14,Bachelors,Male,> 50,1
+11,Bachelors,Female,30-50,1
+0,Masters,Female,> 50,0
+8,Bachelors,Male,> 50,1
+7,Bachelors,Female,30-50,0
+0,Masters,Female,30-50,0
+5,Masters,Female,< 30,1
+4,Bachelors,Female,30-50,1
+5,Masters,Female,30-50,1
+9,Bachelors,Male,< 30,1
+11,Bachelors,Male,< 30,1
+12,Bachelors,Female,> 50,1
+12,PhD,Male,30-50,1
+12,Bachelors,Female,30-50,1
+14,Bachelors,Female,30-50,1
+4,Bachelors,Male,< 30,1
+5,Masters,Male,< 30,1
+4,Bachelors,Male,< 30,1
+10,Bachelors,Female,< 30,1
+11,Bachelors,Male,< 30,0
+4,Bachelors,Male,> 50,1
+3,Bachelors,Male,30-50,0
+2,Masters,Male,< 30,1
+2,Bachelors,Male,< 30,0
+3,Bachelors,Male,30-50,1
+8,Masters,Female,< 30,1
+1,Bachelors,Male,> 50,1
+14,Bachelors,Male,30-50,1
+8,PhD,Male,30-50,1
+0,Bachelors,Male,< 30,1
+13,Bachelors,Female,< 30,1
+14,Bachelors,Female,30-50,1
+14,Bachelors,Male,30-50,1
+0,Bachelors,Female,30-50,0
+4,Bachelors,Male,< 30,1
+5,Bachelors,Male,30-50,1
+5,Bachelors,Female,30-50,1
+2,PhD,Female,30-50,0
+6,Masters,Female,< 30,1
+8,Bachelors,Male,< 30,1
+10,Bachelors,Female,30-50,0
+11,Masters,Male,30-50,1
+9,Bachelors,Male,30-50,1
+7,Bachelors,Female,30-50,0
+5,PhD,Male,30-50,1
+11,Bachelors,Female,30-50,1
+7,Masters,Female,30-50,1
+11,PhD,Male,> 50,1
+4,Bachelors,Female,30-50,1
+7,Bachelors,Female,> 50,1
+9,Bachelors,Male,30-50,1
+11,Masters,Female,< 30,1
+3,Masters,Female,30-50,0
+9,Masters,Male,< 30,1
+7,Bachelors,Female,> 50,1
+9,Masters,Female,30-50,0
+11,PhD,Male,< 30,1
+1,Masters,Female,30-50,0
+11,PhD,Male,> 50,1
+11,Masters,Female,< 30,1
+4,Masters,Female,30-50,0
+8,Bachelors,Male,30-50,1
+3,Bachelors,Male,30-50,1
+10,Bachelors,Female,30-50,1
+5,Masters,Male,< 30,1
+14,Bachelors,Female,< 30,0
+0,Masters,Male,30-50,1
+8,PhD,Female,30-50,1
+0,Masters,Female,> 50,0
+4,Bachelors,Female,< 30,0
+3,Bachelors,Male,30-50,1
+12,Bachelors,Female,< 30,1
+11,Masters,Female,< 30,1
+12,Masters,Male,30-50,1
+12,PhD,Male,30-50,1
+13,Bachelors,Male,30-50,1
+2,PhD,Female,> 50,1
+12,Masters,Female,30-50,0
+5,Bachelors,Male,> 50,1
+1,Masters,Female,30-50,0
+2,Bachelors,Male,30-50,1
+4,Bachelors,Male,30-50,1
+14,Masters,Female,30-50,1
+8,Bachelors,Female,< 30,1
+1,Masters,Female,30-50,0
+9,Masters,Male,< 30,1
+7,Bachelors,Female,30-50,1
+13,Bachelors,Male,30-50,1
+1,Bachelors,Male,< 30,1
+10,Bachelors,Male,< 30,1
+12,Bachelors,Female,> 50,1
+4,Bachelors,Female,30-50,1
+6,Bachelors,Male,< 30,1
+7,Bachelors,Female,30-50,1
+0,Bachelors,Female,30-50,0
+5,Masters,Male,30-50,1
+0,Masters,Female,> 50,0
+1,Bachelors,Female,30-50,0
+14,Bachelors,Male,< 30,1
+0,PhD,Male,30-50,1
+10,Masters,Female,30-50,1
+4,PhD,Female,< 30,1
+9,Masters,Female,< 30,1
+14,Bachelors,Male,< 30,1
+8,Bachelors,Female,30-50,0
+5,Bachelors,Male,30-50,1
+10,Bachelors,Male,30-50,1
+10,Bachelors,Female,> 50,1
+0,Bachelors,Male,30-50,1
+12,Bachelors,Male,< 30,1
+0,Masters,Male,< 30,1
+1,Masters,Male,30-50,1
+8,Bachelors,Male,< 30,1
+2,Masters,Female,30-50,1
+14,Bachelors,Male,30-50,1
+0,Masters,Female,< 30,0
+4,Bachelors,Female,30-50,0
+6,PhD,Female,30-50,1
+5,Masters,Male,30-50,1
+11,Bachelors,Female,< 30,1
+0,Bachelors,Female,30-50,0
+4,Bachelors,Female,< 30,0
+14,Bachelors,Female,> 50,1
+4,Bachelors,Female,< 30,0
+5,Masters,Male,30-50,1
+2,Bachelors,Female,30-50,0
+4,Masters,Female,> 50,1
+6,PhD,Female,< 30,1
+4,Bachelors,Female,< 30,0
+4,Bachelors,Male,< 30,1
+4,Bachelors,Female,< 30,0
+9,Masters,Male,< 30,1
+9,Bachelors,Male,30-50,1
+2,PhD,Male,< 30,1
+0,Masters,Male,< 30,1
+4,Bachelors,Female,30-50,0
+13,Bachelors,Male,< 30,1
+8,Masters,Male,< 30,1
+13,Masters,Female,< 30,1

@@ -2,7 +2,7 @@ import os
 import joblib
 import pandas as pd
 
-def simulate(experience: int, education: str, orig_gender: str, cf_gender: str):
+def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, scenario: str = "Hiring", age_group: str = "30-50"):
     model_path = "models/latest_model.pkl"
     
     if not os.path.exists(model_path):
@@ -14,21 +14,19 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str):
     try:
         model = joblib.load(model_path)
         
-        # We need to pass the same features used in training: ['Experience', 'Education', 'Gender', 'Age']
-        # Since Age wasn't wired up in the UI fetch, we default it to '30-50' for the simulation
-        
+        # Keep all non-sensitive inputs unchanged, then flip only the selected sensitive attribute.
         orig_data = pd.DataFrame([{
             'Experience': experience,
             'Education': education,
             'Gender': orig_gender,
-            'Age': '30-50'
+            'Age': age_group
         }])
         
         cf_data = pd.DataFrame([{
             'Experience': experience,
             'Education': education,
             'Gender': cf_gender,
-            'Age': '30-50'
+            'Age': age_group
         }])
         
         # Predict probability of positive class (Hired = 1)
@@ -45,6 +43,7 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str):
         
         return {
             "success": True,
+            "scenario": scenario,
             "orig_prob": orig_prob,
             "cf_prob": cf_prob,
             "difference": difference

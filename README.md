@@ -59,11 +59,11 @@ The project includes an automated startup script that handles environment setup,
    ```
 
    **What the script does:**
-   - Cleans up any leftover processes on ports 8000 and 8080.
+   - Cleans up any leftover processes on ports 8001 and 8080.
    - Creates a Python virtual environment (`venv`) inside the `backend` folder.
    - Installs all necessary dependencies from `backend/requirements.txt`.
    - Generates a synthetic dataset for testing using `generate_data.py`.
-   - Launches the FastAPI backend server on `http://127.0.0.1:8000`.
+   - Launches the FastAPI backend server on `http://127.0.0.1:8001`.
    - Launches the Frontend local HTTP server on `http://localhost:8080`.
    - Automatically opens your default web browser to the dashboard.
 
@@ -102,6 +102,51 @@ If you prefer to run things manually or are on a non-Windows OS:
 ├── styles.css             # Application styling and themes
 └── start_app.bat          # Automated startup script for Windows
 ```
+
+## 🌐 Deploy to a Public Website (Render)
+
+This repo is now configured for one-click deployment on Render using `render.yaml`.
+
+### 1) Push this project to GitHub
+
+```bash
+git add .
+git commit -m "Prepare FairLens for web deployment"
+git push
+```
+
+### 2) Create a Render Blueprint
+
+1. Go to [Render Dashboard](https://dashboard.render.com/).
+2. Click **New** → **Blueprint**.
+3. Connect your GitHub repo and select this project.
+4. Render will detect `render.yaml` and create:
+   - `fairlens-api` (FastAPI backend)
+   - `fairlens-web` (static frontend)
+
+### 3) Set Environment Variables (Backend)
+
+In `fairlens-api` service settings:
+
+- `GOOGLE_API_KEY` = your Gemini key (optional; JD scanner has rule-based fallback)
+- `ALLOWED_ORIGINS` = your deployed frontend URL (example: `https://fairlens-web.onrender.com`)
+
+### 4) Update Frontend API URL
+
+Edit `config.js`:
+
+```js
+window.FAIRLENS_API_BASE = "https://fairlens-api.onrender.com";
+```
+
+Commit and push this change so the static site calls your hosted backend.
+
+### 5) Open Your Website
+
+- Frontend: `https://fairlens-web.onrender.com`
+- Backend docs: `https://fairlens-api.onrender.com/docs`
+
+If scanner/chat responses are slow on free tier, that is normal due to service cold starts.
 
 ## 🤝 Contributing
 

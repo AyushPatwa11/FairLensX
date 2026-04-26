@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -9,11 +10,15 @@ from services import dataset_analyzer, jd_scanner, profile_simulator, agent_orch
 
 app = FastAPI(title="FairLens AI Backend")
 
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
+allowed_origins = [origin.strip() for origin in allowed_origins_env.split(",") if origin.strip()] or ["*"]
+allow_credentials = "*" not in allowed_origins
+
 # Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -42,9 +47,11 @@ async def simulate_profile(
     experience: int = Form(...),
     education: str = Form(...),
     orig_gender: str = Form(...),
-    cf_gender: str = Form(...)
+    cf_gender: str = Form(...),
+    scenario: str = Form("Hiring"),
+    age_group: str = Form("30-50")
 ):
-    return profile_simulator.simulate(experience, education, orig_gender, cf_gender)
+    return profile_simulator.simulate(experience, education, orig_gender, cf_gender, scenario, age_group)
 
 @app.post("/api/agent/chat")
 async def chat_with_agent(message: str = Form(...)):
@@ -52,4 +59,4 @@ async def chat_with_agent(message: str = Form(...)):
     return {"success": True, "reply": reply}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8001, reload=True)

@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const API_BASE_URL = (window.FAIRLENS_API_BASE || 'http://127.0.0.1:8001').replace(/\/$/, '');
+    const apiUrl = (path) => `${API_BASE_URL}${path}`;
+
     // Navigation
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.view-section');
@@ -72,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('target', targetMap);
             formData.append('sensitive', JSON.stringify(sensitiveMap));
             
-            const response = await fetch('http://127.0.0.1:8000/api/dataset/analyze', {
+            const response = await fetch(apiUrl('/api/dataset/analyze'), {
                 method: 'POST',
                 body: formData
             });
@@ -82,7 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Update score
                 const scoreCircle = document.querySelector('#analysis-dashboard .score-circle');
                 scoreCircle.textContent = result.score;
-                scoreCircle.className = `score-circle ${result.score > 60 ? 'score-high' : 'score-low'}`;
+                let scoreClass = 'score-low';
+                if (result.score > 40) scoreClass = 'score-high';
+                else if (result.score > 20) scoreClass = 'score-medium';
+                scoreCircle.className = `score-circle ${scoreClass}`;
                 
                 document.querySelector('#analysis-dashboard .score-details strong').textContent = result.risk;
                 
@@ -107,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyMitigationBtn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Applying Reweighing...';
         
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/dataset/mitigate', { method: 'POST' });
+            const response = await fetch(apiUrl('/api/dataset/mitigate'), { method: 'POST' });
             const result = await response.json();
             
             if (result.success) {
@@ -152,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData();
             formData.append('text', text);
             
-            const response = await fetch('http://127.0.0.1:8000/api/jd/scan', {
+            const response = await fetch(apiUrl('/api/jd/scan'), {
                 method: 'POST',
                 body: formData
             });
@@ -216,6 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const cfGender = document.getElementById('sim-gender-cf').value;
         const experience = document.getElementById('sim-experience').value || 4;
         const education = document.getElementById('sim-education').value || 'Bachelors';
+        const scenario = document.getElementById('sim-scenario').value || 'Hiring';
+        const ageGroup = document.getElementById('sim-age').value || '30-50';
 
         try {
             const formData = new FormData();
@@ -223,8 +231,10 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('education', education);
             formData.append('orig_gender', origGender);
             formData.append('cf_gender', cfGender);
+            formData.append('scenario', scenario);
+            formData.append('age_group', ageGroup);
 
-            const response = await fetch('http://127.0.0.1:8000/api/profile/simulate', {
+            const response = await fetch(apiUrl('/api/profile/simulate'), {
                 method: 'POST',
                 body: formData
             });
@@ -241,6 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const diffText = result.difference > 0 ? `+${result.difference}% increase` : `${result.difference}% decrease`;
                 document.querySelector('.bias-impact-alert p strong').textContent = diffText;
+                const impactTitle = document.querySelector('.bias-impact-alert .alert strong');
+                impactTitle.textContent = result.difference >= 20 ? 'Severe Bias Impact Detected' : 'Bias Impact Detected';
 
                 simResultsCards.classList.remove('hidden');
                 document.querySelector('#simulator-results h3').style.opacity = '1';
@@ -288,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData();
             formData.append('message', text);
 
-            const response = await fetch('http://127.0.0.1:8000/api/agent/chat', {
+            const response = await fetch(apiUrl('/api/agent/chat'), {
                 method: 'POST',
                 body: formData
             });

@@ -297,9 +297,9 @@
                             <form id="simulator-form" class="mt-4">
                                 <div class="form-group">
                                     <label>Scenario</label>
-                                    <select class="form-control">
-                                        <option>Hiring Algorithm</option>
-                                        <option>Loan Approval</option>
+                                    <select class="form-control" id="sim-scenario">
+                                        <option value="Hiring">Hiring Algorithm</option>
+                                        <option value="Loan">Loan Approval</option>
                                     </select>
                                 </div>
                                 <div class="form-row">
@@ -337,10 +337,10 @@
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label>Age group (Original)</label>
-                                        <select class="form-control">
-                                            <option>> 50</option>
-                                            <option>< 30</option>
-                                            <option>30-50</option>
+                                        <select class="form-control" id="sim-age">
+                                            <option value=">50">&gt; 50</option>
+                                            <option value="<30">&lt; 30</option>
+                                            <option value="30-50">30-50</option>
                                         </select>
                                     </div>
                                 </div>
@@ -403,6 +403,7 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
