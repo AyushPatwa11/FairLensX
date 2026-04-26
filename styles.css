@@ -796,3 +796,92 @@ body {
     display: flex;
     gap: 0.5rem;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .sidebar-header {
+        height: 60px;
+        justify-content: space-between;
+    }
+    
+    .sidebar-footer {
+        display: none; /* Hide profile on mobile to save space */
+    }
+    
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px 16px;
+        gap: 16px;
+        white-space: nowrap;
+    }
+    
+    .nav-item {
+        width: auto;
+        padding: 8px 12px;
+    }
+    
+    .nav-category {
+        display: none;
+    }
+    
+    .top-header {
+        padding: 0 16px;
+        height: 60px;
+    }
+    
+    .content-wrapper {
+        padding: 16px;
+    }
+    
+    .dashboard-grid, 
+    .dashboard-grid.two-col, 
+    .action-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .jd-result-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .cf-comparison {
+        flex-direction: column;
+    }
+    
+    .cf-vs {
+        transform: rotate(90deg);
+        margin: 16px 0;
+    }
+    
+    .panel {
+        padding: 20px;
+    }
+    
+    .upload-zone {
+        padding: 24px;
+    }
+    
+    .chatbot-panel {
+        width: calc(100vw - 32px);
+        right: 16px;
+        bottom: 90px;
+        height: 400px;
+    }
+}
