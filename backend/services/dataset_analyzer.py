@@ -20,7 +20,31 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
     try:
         # 1. Load dataset
         df = pd.read_csv(io.BytesIO(file_content))
-        sensitive_cols = json.loads(sensitive_json)
+        # Accept flexible formats for `sensitive` field coming from the frontend.
+        # Frontend normally sends a JSON string (e.g. '["Gender"]'), but some
+        # clients may send slightly different formats. Try json.loads first,
+        # then fall back to safe coercions.
+        # Debug: log raw incoming value for `sensitive` to help diagnose parsing issues
+        try:
+            print("[dataset_analyzer] raw sensitive field:", repr(sensitive_json))
+        except Exception:
+            pass
+
+        try:
+            sensitive_cols = json.loads(sensitive_json)
+        except Exception:
+            try:
+                import ast
+                sensitive_cols = ast.literal_eval(sensitive_json)
+                if not isinstance(sensitive_cols, list):
+                    sensitive_cols = [sensitive_cols]
+            except Exception:
+                s = (sensitive_json or "").strip()
+                s = s.strip('[]')
+                if not s:
+                    sensitive_cols = []
+                else:
+                        sensitive_cols = [x.strip().strip('"').strip("'") for x in s.split(',') if x.strip()]
         
         if target not in df.columns:
             return {"success": False, "error": f"Target column '{target}' not found in dataset."}

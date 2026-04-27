@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+=======
+from langchain_core.messages import HumanMessage, SystemMessage
+from .llm_helper import get_llm_wrapper
+>>>>>>> c6dbba4322f81e2b4b3962a7c9222169d5e57982
 import os
 import re
 
+<<<<<<< HEAD
 try:
     from langchain_google_genai import ChatGoogleGenerativeAI
     from langchain_core.messages import HumanMessage, SystemMessage
@@ -29,10 +35,13 @@ def _rule_based_nlp_chat(message: str) -> str:
 
     return "I'm currently running in **Offline NLP Mode** without an API key. I understand questions related to *bias, fairness, mitigation, datasets, counterfactuals, and job descriptions*. Could you try rephrasing your question using those terms?"
 
+=======
+>>>>>>> c6dbba4322f81e2b4b3962a7c9222169d5e57982
 def chat_with_agent(message: str) -> str:
     """
     Takes a user message, tries to run it through LangChain, but seamlessly falls back to local NLP.
     """
+<<<<<<< HEAD
     api_key = os.getenv("GOOGLE_API_KEY")
     
     # Check if we should use Offline NLP
@@ -41,10 +50,16 @@ def chat_with_agent(message: str) -> str:
         
     try:
         llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
+=======
+    wrapper = get_llm_wrapper(temperature=0.2)
+    if not wrapper:
+        return "Please set your GOOGLE_API_KEY in the backend/.env file to chat with me!"
+
+    try:
+>>>>>>> c6dbba4322f81e2b4b3962a7c9222169d5e57982
         system_prompt = SystemMessage(content="You are FairLens AI Assistant, a helpful compliance officer. You help users understand AI bias, job description fairness, and dataset mitigation techniques. Keep your answers concise, practical, and formatted neatly.")
         human_msg = HumanMessage(content=message)
-        
-        response = llm.invoke([system_prompt, human_msg])
+        response = wrapper.invoke([system_prompt, human_msg])
         return response.content
     except Exception as e:
         # If API fails for any reason (e.g. rate limit, bad key), gracefully fallback to NLP

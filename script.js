@@ -79,8 +79,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             });
-            const result = await response.json();
-            
+
+            let result;
+            if (!response.ok) {
+                const text = await response.text();
+                // Try to parse JSON error, otherwise show raw body
+                try {
+                    const parsed = JSON.parse(text || '{}');
+                    alert('Analysis failed: ' + (parsed.error || JSON.stringify(parsed)));
+                } catch (e) {
+                    alert(`Analysis failed: ${response.status} ${response.statusText}\n${text}`);
+                }
+                runAnalysisBtn.disabled = false;
+                runAnalysisBtn.innerHTML = 'Run Fairness Analysis';
+                return;
+            }
+
+            try {
+                result = await response.json();
+            } catch (e) {
+                const text = await response.text();
+                alert('Analysis failed: invalid response from server. ' + text);
+                runAnalysisBtn.disabled = false;
+                runAnalysisBtn.innerHTML = 'Run Fairness Analysis';
+                return;
+            }
+
             if (result.success) {
                 // Update score
                 const scoreCircle = document.querySelector('#analysis-dashboard .score-circle');
@@ -200,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Note: Dictionary now moved to Python backend.
 
     scanJdBtn.addEventListener('click', async () => {
+        console.log('🔍 JD Scanner initialized');
         const text = jdInput.value.trim();
         if(!text) {
             alert('Please paste a job description first.');
@@ -210,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scanJdBtn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Scanning...';
 
         try {
+            console.log('📤 Sending request to API:', apiUrl('/api/jd/scan'), 'with text:', text.substring(0, 50) + '...');
             const formData = new FormData();
             formData.append('text', text);
             
@@ -217,21 +243,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             });
+            
+            console.log('📥 Response status:', response.status, response.statusText);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ HTTP Error:', errorText);
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+            
             const result = await response.json();
+            console.log('✅ API Response:', result);
+            
+            if (!result.success) {
+                throw new Error(result.error || 'API returned success=false');
+            }
             
             if (result.success) {
                 let suggestionsHTML = '';
                 
-                result.suggestions.forEach(s => {
-                    suggestionsHTML += `
-                        <div class="suggestion-card">
-                            <p><strong>Type:</strong> ${s.type} Bias</p>
-                            <span class="bad">"${s.word}"</span> → <span class="good">"${s.replacement}"</span>
-                        </div>
-                    `;
-                });
-                
-                if (result.suggestions.length === 0) {
+                // Build suggestions from recommendations
+                if (result.recommendations && result.recommendations.length > 0) {
+                    result.recommendations.forEach(rec => {
+                        suggestionsHTML += `
+                            <div class="suggestion-card">
+                                <p>${rec}</p>
+                            </div>
+                        `;
+                    });
+                } else {
                     suggestionsHTML = '<div class="alert alert-success">No significant bias detected. Good job!</div>';
                 }
                 
@@ -240,23 +280,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 jdResults.classList.remove('hidden');
                 
                 const jdScoreCircle = document.getElementById('jd-score-circle');
-                jdScoreCircle.textContent = result.score;
+                jdScoreCircle.textContent = result.bias_score;
                 
                 let circleClass = 'score-low';
-                if(result.risk === 'High Risk') circleClass = 'score-high';
-                else if(result.risk === 'Medium Risk') circleClass = 'score-medium';
+                if(result.risk_level === 'High Risk') circleClass = 'score-high';
+                else if(result.risk_level === 'Medium Risk') circleClass = 'score-medium';
                 jdScoreCircle.className = `score-circle ${circleClass}`;
                 
-                document.getElementById('jd-risk-level').textContent = result.risk;
-                if(result.risk === 'High Risk') document.getElementById('jd-risk-level').style.color = 'var(--danger-color)';
-                else if(result.risk === 'Medium Risk') document.getElementById('jd-risk-level').style.color = 'var(--warning-color)';
+                document.getElementById('jd-risk-level').textContent = result.risk_level;
+                if(result.risk_level === 'High Risk') document.getElementById('jd-risk-level').style.color = 'var(--danger-color)';
+                else if(result.risk_level === 'Medium Risk') document.getElementById('jd-risk-level').style.color = 'var(--warning-color)';
                 else document.getElementById('jd-risk-level').style.color = 'var(--success-color)';
 
-                document.getElementById('gb-count').textContent = result.gender_count;
-                document.getElementById('ab-count').textContent = result.age_count;
+                // Count biases by type from detected_biases array
+                let genderCount = 0, ageCount = 0, disabilityCount = 0, religionCount = 0, 
+                    familyCount = 0, physicalCount = 0, socioEconomicCount = 0, culturalCount = 0, 
+                    healthCount = 0, casteCount = 0, appearanceCount = 0;
+                
+                if (result.detected_biases) {
+                    result.detected_biases.forEach(bias => {
+                        if (bias.attribute === 'Gender') genderCount++;
+                        if (bias.attribute === 'Age') ageCount++;
+                        if (bias.attribute === 'Disability') disabilityCount++;
+                        if (bias.attribute === 'Religion') religionCount++;
+                        if (bias.attribute === 'Family') familyCount++;
+                        if (bias.attribute === 'Physical') physicalCount++;
+                        if (bias.attribute === 'Socio-Economic') socioEconomicCount++;
+                        if (bias.attribute === 'Cultural') culturalCount++;
+                        if (bias.attribute === 'Health') healthCount++;
+                        if (bias.attribute === 'Caste') casteCount++;
+                        if (bias.attribute === 'Appearance') appearanceCount++;
+                    });
+                }
+                document.getElementById('gb-count').textContent = genderCount;
+                document.getElementById('ab-count').textContent = ageCount;
+                document.getElementById('db-count').textContent = disabilityCount;
+                document.getElementById('rb-count').textContent = religionCount;
+                document.getElementById('fb-count').textContent = familyCount;
+                document.getElementById('pb-count').textContent = physicalCount;
+                document.getElementById('seb-count').textContent = socioEconomicCount;
+                document.getElementById('cb-count').textContent = culturalCount;
+                document.getElementById('hb-count').textContent = healthCount;
+                document.getElementById('casteb-count').textContent = casteCount;
+                document.getElementById('appb-count').textContent = appearanceCount;
             }
         } catch (err) {
-            alert('Failed to scan job description.');
+            console.error('❌ JD Scan Error:', err);
+            console.error('Error stack:', err.stack);
+            alert('Failed to scan job description.\n\nError: ' + (err.message || 'Unknown error') + '\n\nCheck console (F12) for details.');
         } finally {
             scanJdBtn.disabled = false;
             scanJdBtn.innerHTML = '<i class="ph ph-magnifying-glass"></i> Scan Complete';
@@ -293,7 +364,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 body: formData
             });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
+            
             const result = await response.json();
+            
+            if (!result.success) {
+                throw new Error(result.error || 'API returned success=false');
+            }
             
             if (result.success) {
                 document.getElementById('res-orig-gender').textContent = origGender;
@@ -301,13 +382,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('exp-orig').textContent = origGender;
                 document.getElementById('exp-cf').textContent = cfGender;
                 
-                document.querySelector('.cf-card.original .cf-score').textContent = `${result.orig_prob}%`;
-                document.querySelector('.cf-card.counterfactual .cf-score').textContent = `${result.cf_prob}%`;
+                // Get probabilities from counterfactual_analysis
+                const analysis = result.counterfactual_analysis || {};
+                const origProb = analysis.original_prediction || 0;
+                const cfProb = analysis.counterfactual_prediction || 0;
+                const difference = Math.abs(analysis.difference) || 0;
                 
-                const diffText = result.difference > 0 ? `+${result.difference}% increase` : `${result.difference}% decrease`;
+                document.querySelector('.cf-card.original .cf-score').textContent = `${origProb.toFixed(1)}%`;
+                document.querySelector('.cf-card.counterfactual .cf-score').textContent = `${cfProb.toFixed(1)}%`;
+                
+                const diffText = difference > 0 ? `${difference.toFixed(1)}% difference` : `${difference.toFixed(1)}% difference`;
                 document.querySelector('.bias-impact-alert p strong').textContent = diffText;
                 const impactTitle = document.querySelector('.bias-impact-alert .alert strong');
-                impactTitle.textContent = result.difference >= 20 ? 'Severe Bias Impact Detected' : 'Bias Impact Detected';
+                impactTitle.textContent = difference >= 20 ? 'Severe Bias Impact Detected' : 'Bias Impact Detected';
 
                 simResultsCards.classList.remove('hidden');
                 document.querySelector('#simulator-results h3').style.opacity = '1';
@@ -316,7 +403,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('simulator-results').scrollIntoView({ behavior: 'smooth' });
             }
         } catch (err) {
-            alert('Simulation failed.');
+            console.error('Simulation Error:', err);
+            alert('Simulation failed: ' + (err.message || 'Unknown error'));
         } finally {
             simulateBtn.disabled = false;
             simulateBtn.innerHTML = 'Run Simulation';
