@@ -136,16 +136,16 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
         api_key = os.getenv("GOOGLE_API_KEY")
         if api_key and api_key != "your_gemini_api_key_here":
             try:
-                from langchain_google_genai import ChatGoogleGenerativeAI
-                from langchain_core.prompts import PromptTemplate
-                
-                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
-                
-                stats_text = f"Total Candidates Analyzed: {len(df)}\nOutcome Variable (e.g. Hired): {target}\n"
-                for g in group_metrics:
-                    stats_text += f"\nAttribute: {g['attribute']}\n- Demographic Parity Difference: {g['demographic_parity_difference']}\n- Selection Rates by Group: {g['selection_rates']}\n"
-                
-                prompt_text = """You are an expert AI Bias Auditor and HR Analytics Specialist.
+                from .llm_helper import get_llm_wrapper
+                wrapper = get_llm_wrapper(temperature=0.2)
+                if wrapper:
+                    from langchain_core.prompts import PromptTemplate
+                    
+                    stats_text = f"Total Candidates Analyzed: {len(df)}\nOutcome Variable (e.g. Hired): {target}\n"
+                    for g in group_metrics:
+                        stats_text += f"\nAttribute: {g['attribute']}\n- Demographic Parity Difference: {g['demographic_parity_difference']}\n- Selection Rates by Group: {g['selection_rates']}\n"
+                    
+                    prompt_text = """You are an expert AI Bias Auditor and HR Analytics Specialist.
 
 You have been given the statistical summary of a recruitment dataset. 
 Your task is to perform a thorough **bias detection analysis** on the hiring decisions based strictly on these metrics:
@@ -166,11 +166,11 @@ Rules:
 - Always support your conclusions with the numbers and percentages provided above. Do not hallucinate data.
 - Keep the report concise and high-impact.
 """
-                prompt = PromptTemplate.from_template(prompt_text)
-                response = llm.invoke(prompt.format(stats=stats_text))
-                
-                # Convert basic markdown to HTML for display if needed or keep as markdown
-                ai_report = response.content
+                    prompt = PromptTemplate.from_template(prompt_text)
+                    response = wrapper.invoke(prompt.format(stats=stats_text))
+                    ai_report = response.content
+                else:
+                    ai_report = "API Key found but LLM initialization failed."
             except Exception as e:
                 ai_report = f"Failed to generate AI report: {str(e)}"
         else:

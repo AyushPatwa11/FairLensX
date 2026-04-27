@@ -1,6 +1,7 @@
 import os
 import joblib
 import pandas as pd
+import numpy as np
 
 def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, scenario: str = "Hiring", age_group: str = "30-50", 
              cf_age: str = None, cf_education: str = None, cf_location: str = None):
@@ -39,20 +40,52 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, 
             'Age': cf_age_val
         }])
         
-        # Predict probability of positive class (Hired = 1)
-        # Predict probability of positive class
-        pos_class = model.named_steps["classifier"].classes_[-1]
-        class_index = list(model.named_steps["classifier"].classes_).index(pos_class)
+        # Ensure data types match what the model might expect (robustness)
+        for df in [orig_data, cf_data]:
+            df['Experience'] = float(df['Experience'])
+            df['Education'] = str(df['Education'])
+            df['Gender'] = str(df['Gender'])
+            df['Age'] = str(df['Age'])
+
+        # Predict probability or class
+        # Note: Fairlearn mitigators might not support predict_proba
+        classifier = model.named_steps["classifier"]
         
-        orig_prob = model.predict_proba(orig_data)[0][class_index] * 100
-        cf_prob = model.predict_proba(cf_data)[0][class_index] * 100
+        def get_prob(data):
+            if hasattr(classifier, "predict_proba"):
+                try:
+                    # Standard sklearn model
+                    classes = list(classifier.classes_)
+                    # Try to find the 'positive' class (1, 'Yes', 'Hired')
+                    pos_class = classes[-1] 
+                    if 1 in classes: pos_class = 1
+                    
+                    idx = classes.index(pos_class)
+                    probs = model.predict_proba(data)[0]
+                    return float(probs[idx] * 100)
+                except Exception:
+                    # Fallback to binary if indexing fails
+                    return 100.0 if model.predict(data)[0] == 1 else 0.0
+            else:
+                # Mitigated model (e.g. ExponentiatedGradient) usually only has .predict()
+                # Returns 100% for positive class, 0% for negative
+                pred = model.predict(data)[0]
+                # Coerce to int/float for comparison
+                try:
+                    if int(pred) == 1: return 100.0
+                except:
+                    if str(pred).lower() in ['yes', 'hired', 'true']: return 100.0
+                return 0.0
+
+        orig_prob = get_prob(orig_data)
+        cf_prob = get_prob(cf_data)
         
         orig_prob = round(orig_prob, 1)
         cf_prob = round(cf_prob, 1)
         
         difference = round(cf_prob - orig_prob, 1)
         
-        # Identify which attributes changed for detailed explanation
+        # Identify which attributes changed
         changed_attributes = []
         if cf_gender != orig_gender:
             changed_attributes.append(f"Gender: {orig_gender} → {cf_gender}")
@@ -69,12 +102,12 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, 
         for g in genders:
             for a in ages:
                 temp_data = pd.DataFrame([{
-                    'Experience': experience,
-                    'Education': education,
-                    'Gender': g,
-                    'Age': a
+                    'Experience': float(experience),
+                    'Education': str(education),
+                    'Gender': str(g),
+                    'Age': str(a)
                 }])
-                prob = model.predict_proba(temp_data)[0][class_index] * 100
+                prob = get_prob(temp_data)
                 cf_grid.append({
                     "Gender": g,
                     "Age": a,
@@ -86,27 +119,26 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, 
         api_key = os.getenv("GOOGLE_API_KEY")
         if api_key and api_key != "your_gemini_api_key_here":
             try:
-                from langchain_google_genai import ChatGoogleGenerativeAI
-                from langchain_core.prompts import PromptTemplate
-                
-                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
-                
-                prompt_text = """You are an expert HR AI assistant. 
+                from .llm_helper import get_llm_wrapper
+                wrapper = get_llm_wrapper(temperature=0.2)
+                if wrapper:
+                    prompt_text = """You are an expert HR AI assistant. 
 A candidate profile has a baseline probability of being hired of {orig_prob}%. 
-When checking the alternative scenario, the probability becomes {cf_prob}%. 
+In the counterfactual scenario, the probability becomes {cf_prob}%. 
 
-Here is the full matrix of probabilities for this exact candidate based purely on demographic swaps (holding experience/education constant):
+What-If Matrix (Demographic Swaps):
 {grid_text}
 
-Write 2 concise, highly personalized sentences explaining how their demographic background is influencing the algorithmic decision. Focus on the penalty or boost they are receiving. Do not use markdown, just plain text.
-"""
-                grid_text = "\n".join([f"- Gender: {item['Gender']}, Age: {item['Age']} -> {item['prob']}%" for item in cf_grid])
-                
-                prompt = PromptTemplate.from_template(prompt_text)
-                response = llm.invoke(prompt.format(orig_prob=orig_prob, cf_prob=cf_prob, grid_text=grid_text))
-                llm_explanation = response.content.strip()
+Write 2 concise sentences explaining the bias or fairness detected. Do not use markdown."""
+                    grid_text = "\n".join([f"- {item['Gender']}, {item['Age']} -> {item['prob']}%" for item in cf_grid])
+                    from langchain_core.prompts import PromptTemplate
+                    prompt = PromptTemplate.from_template(prompt_text)
+                    response = wrapper.invoke(prompt.format(orig_prob=orig_prob, cf_prob=cf_prob, grid_text=grid_text))
+                    llm_explanation = response.content.strip()
+                else:
+                    llm_explanation = "API Key configured but LLM wrapper initialization failed."
             except Exception as e:
-                llm_explanation = f"Failed to generate AI explanation: {str(e)}"
+                llm_explanation = f"AI Explanation unavailable: {str(e)}"
         else:
             llm_explanation = "Offline Mode: Provide an API key to receive personalized AI explanations."
         
