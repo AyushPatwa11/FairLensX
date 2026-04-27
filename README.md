@@ -2,9 +2,12 @@
 
 FairLens AI is a full-stack web application designed to detect, analyze, and mitigate potential biases within datasets, machine learning models, and job descriptions. It leverages advanced analytics and hybrid Neuro-Symbolic AI agents (LangChain/LangGraph) to promote fair, inclusive, and transparent decision-making processes.
 
+
+
 ## 🌟 Key Features
 
-1. **Dataset Analyzer**
+
+1.  ***Dataset Analyzer***
    - Upload structured CSV datasets to evaluate fairness metrics.
    - Detect disparate impact based on sensitive attributes (Gender, Age, Race, etc.).
    - Calculate Overall Bias Score and Demographic Parity Ratio.
