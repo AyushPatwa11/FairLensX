@@ -30,8 +30,9 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, 
         }])
         
         # Predict probability of positive class (Hired = 1)
-        # model.classes_ usually has [0, 1]. We want the index of 1.
-        class_index = list(model.classes_).index(1) if 1 in model.classes_ else 1
+        # Predict probability of positive class
+        pos_class = model.named_steps["classifier"].classes_[-1]
+        class_index = list(model.named_steps["classifier"].classes_).index(pos_class)
         
         orig_prob = model.predict_proba(orig_data)[0][class_index] * 100
         cf_prob = model.predict_proba(cf_data)[0][class_index] * 100
@@ -49,4 +50,6 @@ def simulate(experience: int, education: str, orig_gender: str, cf_gender: str, 
             "difference": difference
         }
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        import traceback
+        error_trace = traceback.format_exc()
+        return {"success": False, "error": f"{str(e)} | Trace: {error_trace}"}

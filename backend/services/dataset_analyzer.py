@@ -8,9 +8,12 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from fairlearn.metrics import demographic_parity_difference, selection_rate
+from fairlearn.reductions import ExponentiatedGradient, DemographicParity
+import numpy as np
 
 # Ensure models directory exists
 os.makedirs("models", exist_ok=True)
+
 LAST_ANALYSIS = {}
 
 def analyze(file_content: bytes, target: str, sensitive_json: str):
@@ -84,9 +87,10 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
                 dpd = abs(demographic_parity_difference(y_true=y, y_pred=y_pred, sensitive_features=groups))
                 dpd_values.append(dpd)
                 rates = {}
+                pos_label = model.named_steps["classifier"].classes_[-1]
                 for group_value in groups.dropna().unique():
                     mask = groups == group_value
-                    rates[str(group_value)] = round(float(selection_rate(y_true=y[mask], y_pred=y_pred[mask])), 3)
+                    rates[str(group_value)] = round(float(selection_rate(y_true=y[mask], y_pred=y_pred[mask], pos_label=pos_label)), 3)
                 group_metrics.append({
                     "attribute": sensitive_feature,
                     "demographic_parity_difference": round(float(dpd), 3),
@@ -103,12 +107,73 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
         if bias_score > 40:
             risk_level = "High Bias Detected"
 
-        # 6. Save model + state for mitigation/re-evaluation
+        # 6. Generate Hybrid AI Report
+        ai_report = ""
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if api_key and api_key != "your_gemini_api_key_here":
+            try:
+                from langchain_google_genai import ChatGoogleGenerativeAI
+                from langchain_core.prompts import PromptTemplate
+                
+                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2)
+                
+                stats_text = f"Total Candidates Analyzed: {len(df)}\nOutcome Variable (e.g. Hired): {target}\n"
+                for g in group_metrics:
+                    stats_text += f"\nAttribute: {g['attribute']}\n- Demographic Parity Difference: {g['demographic_parity_difference']}\n- Selection Rates by Group: {g['selection_rates']}\n"
+                
+                prompt_text = """You are an expert AI Bias Auditor and HR Analytics Specialist.
+
+You have been given the statistical summary of a recruitment dataset. 
+Your task is to perform a thorough **bias detection analysis** on the hiring decisions based strictly on these metrics:
+
+{stats}
+
+Follow these steps carefully:
+
+1. **Overall Selection Rate Analysis**
+2. **Bias Detection Across Dimensions** (Analyze the provided selection rates and Demographic Parity Differences)
+3. **Statistical Analysis** (Highlight significant disparities)
+4. **Bias Classification** (Severity: Mild / Moderate / Severe / Critical, and provide evidence)
+5. **Recommendations**
+
+Rules:
+- Be objective, data-driven, and neutral. Do not add moral judgments.
+- Use clear, professional Markdown formatting.
+- Always support your conclusions with the numbers and percentages provided above. Do not hallucinate data.
+- Keep the report concise and high-impact.
+"""
+                prompt = PromptTemplate.from_template(prompt_text)
+                response = llm.invoke(prompt.format(stats=stats_text))
+                
+                # Convert basic markdown to HTML for display if needed or keep as markdown
+                ai_report = response.content
+            except Exception as e:
+                ai_report = f"Failed to generate AI report: {str(e)}"
+        else:
+            ai_report = "Offline Mode: AI Audit Report unavailable. Please add an API key to enable."
+
+        # 7. Extract Feature Importances (XAI)
+        coefs = model.named_steps["classifier"].coef_[0]
+        feature_names = preprocessor.get_feature_names_out()
+        
+        # Create dictionary of absolute values for sorting, but keep original values
+        importance_dict = {name.replace('cat__', '').replace('num__', ''): float(coef) 
+                           for name, coef in zip(feature_names, coefs)}
+        
+        # Sort by absolute magnitude and get top 5
+        sorted_features = sorted(importance_dict.items(), key=lambda item: abs(item[1]), reverse=True)[:5]
+        feature_importances = {k: round(v, 3) for k, v in sorted_features}
+
+        # 8. Save model + state for mitigation/re-evaluation
         joblib.dump(model, "models/latest_model.pkl")
         global LAST_ANALYSIS
         LAST_ANALYSIS = {
             "score": bias_score,
-            "group_metrics": group_metrics
+            "group_metrics": group_metrics,
+            "X": X,
+            "y": y,
+            "preprocessor": preprocessor,
+            "valid_sensitive": valid_sensitive
         }
 
         return {
@@ -118,18 +183,69 @@ def analyze(file_content: bytes, target: str, sensitive_json: str):
             "score": bias_score,
             "risk": risk_level,
             "group_metrics": group_metrics,
+            "ai_report": ai_report,
+            "feature_importances": feature_importances,
             "message": f"Model successfully trained on {len(df)} rows. Weights saved to disk."
         }
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        import traceback
+        error_trace = traceback.format_exc()
+        return {"success": False, "error": f"{str(e)} | Trace: {error_trace}"}
 
 def mitigate():
-    previous_score = LAST_ANALYSIS.get("score", 60)
-    new_score = max(0, int(round(previous_score * 0.4)))
-    reduction = previous_score - new_score
-    return {
-        "success": True,
-        "new_score": new_score,
-        "message": "Mitigation (Reweighing) Applied Successfully. Model retrained.",
-        "reduction": reduction
-    }
+    try:
+        if not LAST_ANALYSIS or "X" not in LAST_ANALYSIS:
+            return {"success": False, "error": "No dataset available for mitigation. Please run Mode 1 analysis first."}
+            
+        X = LAST_ANALYSIS["X"]
+        y = LAST_ANALYSIS["y"]
+        preprocessor = LAST_ANALYSIS["preprocessor"]
+        valid_sensitive = LAST_ANALYSIS["valid_sensitive"]
+        previous_score = LAST_ANALYSIS.get("score", 60)
+        
+        if not valid_sensitive:
+            return {"success": False, "error": "No sensitive attributes found to mitigate."}
+            
+        # We will mitigate based on the first identified sensitive feature
+        sensitive_feature = valid_sensitive[0]
+        groups = X[sensitive_feature]
+        
+        # Transform data using the already fitted preprocessor
+        X_transformed = preprocessor.transform(X)
+        
+        # Apply True Algorithmic Mitigation using ExponentiatedGradient
+        base_estimator = LogisticRegression(max_iter=1000)
+        mitigator = ExponentiatedGradient(
+            estimator=base_estimator,
+            constraints=DemographicParity(),
+            max_iter=20
+        )
+        
+        mitigator.fit(X_transformed, y, sensitive_features=groups)
+        
+        # Predict with mitigated model
+        y_pred_mitigated = mitigator.predict(X_transformed)
+        
+        # Calculate new bias score
+        dpd = abs(demographic_parity_difference(y_true=y, y_pred=y_pred_mitigated, sensitive_features=groups))
+        new_score = int(dpd * 100)
+        reduction = previous_score - new_score
+        
+        # Wrap the mitigated estimator back into a pipeline so Mode 3 can use it seamlessly
+        mitigated_pipeline = Pipeline(steps=[
+            ("preprocessor", preprocessor),
+            ("classifier", mitigator)
+        ])
+        
+        joblib.dump(mitigated_pipeline, "models/latest_model.pkl")
+        
+        return {
+            "success": True,
+            "new_score": new_score,
+            "message": f"Algorithmic Mitigation (Exponentiated Gradient) Applied Successfully on {sensitive_feature}. Debiased model saved.",
+            "reduction": reduction
+        }
+    except Exception as e:
+        import traceback
+        error_trace = traceback.format_exc()
+        return {"success": False, "error": f"Mitigation failed: {str(e)} | Trace: {error_trace}"}

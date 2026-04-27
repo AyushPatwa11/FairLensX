@@ -90,7 +90,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 else if (result.score > 20) scoreClass = 'score-medium';
                 scoreCircle.className = `score-circle ${scoreClass}`;
                 
+                // Update feature importances (XAI)
+                if (result.feature_importances) {
+                    const chartContainer = document.getElementById('feature-importance-chart');
+                    chartContainer.innerHTML = ''; // Clear old content
+                    
+                    // Find max absolute value for scaling
+                    const maxAbs = Math.max(...Object.values(result.feature_importances).map(Math.abs));
+                    
+                    for (const [feature, weight] of Object.entries(result.feature_importances)) {
+                        const isPositive = weight > 0;
+                        const percentage = Math.max(5, (Math.abs(weight) / maxAbs) * 100);
+                        
+                        const barHtml = `
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-between mb-1" style="font-size: 0.85rem;">
+                                    <span>${feature.replace('_', ' ')}</span>
+                                    <span class="${isPositive ? 'text-success' : 'text-danger'}">
+                                        ${isPositive ? '+' : ''}${weight}
+                                    </span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar ${isPositive ? 'bg-success' : 'bg-danger'}" 
+                                         role="progressbar" 
+                                         style="width: ${percentage}%">
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        chartContainer.innerHTML += barHtml;
+                    }
+                }
+                
                 document.querySelector('#analysis-dashboard .score-details strong').textContent = result.risk;
+                
+                // Display AI Report
+                if (result.ai_report) {
+                    const reportPanel = document.getElementById('ai-report-panel');
+                    const reportContent = document.getElementById('ai-report-content');
+                    
+                    // Simple Markdown to HTML conversion
+                    let htmlReport = result.ai_report
+                        .replace(/^### (.*$)/gim, '<h4>$1</h4>')
+                        .replace(/^## (.*$)/gim, '<h3 class="mt-3 mb-2">$1</h3>')
+                        .replace(/^# (.*$)/gim, '<h2 class="mt-4 mb-2">$1</h2>')
+                        .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+                        .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+                        .replace(/\n/gim, '<br>');
+                        
+                    reportContent.innerHTML = htmlReport;
+                    reportPanel.style.display = 'block';
+                }
                 
                 runAnalysisBtn.disabled = false;
                 runAnalysisBtn.innerHTML = 'Analysis Complete';
@@ -119,6 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 const newScoreCircle = document.querySelector('#post-mitigation .score-circle');
                 newScoreCircle.textContent = result.new_score;
+                
+                let scoreClass = 'score-low';
+                if (result.new_score > 40) scoreClass = 'score-high';
+                else if (result.new_score > 20) scoreClass = 'score-medium';
+                newScoreCircle.className = `score-circle ${scoreClass}`;
                 
                 document.querySelector('#post-mitigation .score-details p').textContent = `Reduced by ${result.reduction} points`;
                 

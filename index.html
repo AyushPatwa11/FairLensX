@@ -168,11 +168,16 @@
                                 <div class="stat-card">
                                     <h3 class="mb-2">Overall Bias Score</h3>
                                     <div class="score-display">
-                                        <div class="score-circle score-high">74</div>
+                                        <div class="score-circle score-high">--</div>
                                         <div class="score-details">
                                             <p>Scale: 0 (Fair) to 100 (Unfair)</p>
-                                            <strong>Significant disparate impact found on attribute: Gender.</strong>
+                                            <strong>Awaiting Analysis</strong>
                                         </div>
+                                    </div>
+                                    
+                                    <h3 class="mt-4 mb-2">Feature Importance (XAI)</h3>
+                                    <div id="feature-importance-chart" class="mt-3">
+                                        <p class="text-muted">Run analysis to see top driving factors...</p>
                                     </div>
                                 </div>
                                 <div class="stat-card">
@@ -190,6 +195,14 @@
                                         </div>
                                     </div>
                                     <p class="mt-3 text-sm text-muted">Rule of thumb: Ratio should be > 80% (Currently ~37%).</p>
+                                </div>
+                            </div>
+
+                            <!-- AI Audit Report Panel -->
+                            <div class="panel mt-4 ai-report-panel" id="ai-report-panel" style="display: none; border-left: 4px solid var(--primary-color);">
+                                <h2 style="color: var(--primary-color);"><i class="ph-fill ph-sparkle"></i> AI Bias Audit Report</h2>
+                                <div id="ai-report-content" class="markdown-content mt-3" style="line-height: 1.6; color: var(--text-color);">
+                                    <!-- Report goes here -->
                                 </div>
                             </div>
 
@@ -338,8 +351,8 @@
                                     <div class="form-group">
                                         <label>Age group (Original)</label>
                                         <select class="form-control" id="sim-age">
-                                            <option value=">50">&gt; 50</option>
-                                            <option value="<30">&lt; 30</option>
+                                            <option value="> 50">&gt; 50</option>
+                                            <option value="< 30">&lt; 30</option>
                                             <option value="30-50">30-50</option>
                                         </select>
                                     </div>
