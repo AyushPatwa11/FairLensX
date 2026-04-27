@@ -382,19 +382,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('exp-orig').textContent = origGender;
                 document.getElementById('exp-cf').textContent = cfGender;
                 
-                // Get probabilities from counterfactual_analysis
-                const analysis = result.counterfactual_analysis || {};
-                const origProb = analysis.original_prediction || 0;
-                const cfProb = analysis.counterfactual_prediction || 0;
-                const difference = Math.abs(analysis.difference) || 0;
+                // Get probabilities from direct result
+                const origProb = result.orig_prob || 0;
+                const cfProb = result.cf_prob || 0;
+                const difference = Math.abs(result.difference) || 0;
                 
                 document.querySelector('.cf-card.original .cf-score').textContent = `${origProb.toFixed(1)}%`;
                 document.querySelector('.cf-card.counterfactual .cf-score').textContent = `${cfProb.toFixed(1)}%`;
                 
-                const diffText = difference > 0 ? `${difference.toFixed(1)}% difference` : `${difference.toFixed(1)}% difference`;
+                const diffText = difference > 0 ? `+${difference.toFixed(1)}% difference` : `${difference.toFixed(1)}% difference`;
                 document.querySelector('.bias-impact-alert p strong').textContent = diffText;
                 const impactTitle = document.querySelector('.bias-impact-alert .alert strong');
-                impactTitle.textContent = difference >= 20 ? 'Severe Bias Impact Detected' : 'Bias Impact Detected';
+                impactTitle.textContent = difference >= 15 ? 'Severe Bias Impact Detected' : (difference >= 5 ? 'Bias Impact Detected' : 'Minimal Bias Impact');
+                
+                // Render LLM Explanation
+                const aiExplanationContainer = document.getElementById('sim-ai-explanation');
+                if (aiExplanationContainer) {
+                    aiExplanationContainer.textContent = result.llm_explanation || 'No explanation generated.';
+                }
+                
+                // Render What-If Matrix (Counterfactual Grid)
+                const matrixContainer = document.getElementById('sim-whatif-matrix');
+                if (matrixContainer && result.cf_grid) {
+                    matrixContainer.innerHTML = ''; // Clear previous
+                    result.cf_grid.forEach(item => {
+                        // Color scale for probabilities: <40=red, 40-70=yellow, >70=green
+                        let badgeColor = '#dc3545'; // red
+                        if (item.prob > 70) badgeColor = '#28a745'; // green
+                        else if (item.prob >= 40) badgeColor = '#ffc107'; // yellow
+                        
+                        const textClass = item.prob >= 40 && item.prob <= 70 ? 'text-dark' : 'text-white';
+                        
+                        const cardHtml = `
+                            <div style="background-color: var(--body-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 15px; text-align: center; min-width: 120px; flex-grow: 1;">
+                                <div class="text-muted small mb-1">${item.Gender} | ${item.Age}</div>
+                                <span class="badge ${textClass}" style="background-color: ${badgeColor}; font-size: 1rem; padding: 6px 12px;">${item.prob.toFixed(1)}%</span>
+                            </div>
+                        `;
+                        matrixContainer.innerHTML += cardHtml;
+                    });
+                }
 
                 simResultsCards.classList.remove('hidden');
                 document.querySelector('#simulator-results h3').style.opacity = '1';
