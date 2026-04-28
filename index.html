@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Global Background Video for Dashboard -->
+    <video class="bg-video" id="bg-video" autoplay muted loop playsinline>
+        <source src="AI_neural_network_202604282109.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
+
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
@@ -29,13 +35,13 @@
                 </button>
                 <div class="nav-category">Tools</div>
                 <button class="nav-item" data-target="dataset-analyzer">
-                    <i class="ph ph-table"></i> Dataset Analyzer
+                    <i class="ph ph-database"></i> Dataset Analyzer
                 </button>
                 <button class="nav-item" data-target="jd-scanner">
-                    <i class="ph ph-file-text"></i> JD Scanner
+                    <i class="ph ph-file-text"></i> Language Analyzer
                 </button>
                 <button class="nav-item" data-target="profile-simulator">
-                    <i class="ph ph-users"></i> Profile Simulator
+                    <i class="ph ph-users"></i> Bias Simulator
                 </button>
             </nav>
 
@@ -54,16 +60,60 @@
         <main class="main-content">
             <header class="top-header">
                 <h1 id="page-title">Dashboard</h1>
-                <div class="header-actions">
-                    <button class="btn btn-outline"><i class="ph ph-download-simple"></i> Export PDF Report</button>
-                    <button class="btn btn-icon"><i class="ph ph-bell"></i><span class="badge"></span></button>
-                </div>
+            </header>
             </header>
 
             <div class="content-wrapper">
-                
                 <!-- Dashboard View -->
                 <section id="dashboard" class="view-section active">
+                    <!-- Dashboard Hero -->
+                    <div class="dashboard-hero-section">
+                        <div class="badge-pill">FairLens AI</div>
+                        <h1>Precision Auditing for the AI Era</h1>
+                        <p>The world's first comprehensive governance suite designed to identify, simulate, and mitigate algorithmic bias at the microscopic level.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-hero-primary" onclick="document.querySelector('.dashboard-dark-bg').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+                            <button class="btn btn-hero-secondary"><i class="ph-fill ph-play-circle"></i> View Demo</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-dark-bg">
+
+
+                        <div class="modular-section panel">
+                        <h2 style="margin-bottom:8px;">Modular Intelligence</h2>
+                        <p class="text-muted">A modular audit suite: pick the entry point that fits your workflow.</p>
+                        <div class="modes-grid">
+                            <div class="mode-card">
+                                <i class="ph ph-database"></i>
+                                <h4>Dataset Analyzer</h4>
+                                <p>Scrutinize training data before deployment. Identify hidden correlations and underrepresented demographics.</p>
+                                <a class="explore" href="#" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click();return false;">Explore Mode →</a>
+                            </div>
+                            <div class="mode-card">
+                                <i class="ph ph-file-text"></i>
+                                <h4>Language Analyzer</h4>
+                                <p>Detect harmful or exclusionary language in job descriptions and policies. Get inclusive rewrites.</p>
+                                <a class="explore" href="#" onclick="document.querySelector('[data-target=\'jd-scanner\']').click();return false;">Explore Mode →</a>
+                            </div>
+                            <div class="mode-card">
+                                <i class="ph ph-users"></i>
+                                <h4>Bias Simulator</h4>
+                                <p>Stress-test models with counterfactual profiles and adversarial scenarios to surface long-term impacts.</p>
+                                <a class="explore" href="#" onclick="document.querySelector('[data-target=\'profile-simulator\']').click();return false;">Explore Mode →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel ready-cta">
+                        <h2>Ready to Audit Your Systems?</h2>
+                        <p class="text-muted">Choose your entry point and start securing your enterprise intelligence today.</p>
+                        <div class="cta-grid">
+                            <button class="btn cta-btn" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">Analyze Data</button>
+                            <button class="btn cta-btn secondary" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">Analyze Language</button>
+                            <button class="btn cta-btn" style="background:linear-gradient(90deg,var(--primary-color),var(--primary-hover));color:#071024;" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">Simulate Bias</button>
+                        </div>
+                    </div>
                     <div class="dashboard-grid">
                         <div class="stat-card">
                             <div class="stat-header">
@@ -104,8 +154,8 @@
                             </div>
                             <div class="action-card" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">
                                 <i class="ph-duotone ph-text-aa"></i>
-                                <h4>Scan Job Description</h4>
-                                <p>Detect hidden bias in your hiring material.</p>
+                                <h4>Bias Language Analyzer</h4>
+                                <p>Detect hidden bias in policies or hiring material.</p>
                             </div>
                             <div class="action-card" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">
                                 <i class="ph-duotone ph-git-diff"></i>
@@ -113,6 +163,34 @@
                                 <p>Test individual profiles against decision models.</p>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="panel mt-4">
+                        <h2>About FairLens</h2>
+                        <p>FairLens AI helps teams identify and mitigate algorithmic bias across hiring, lending, and healthcare workflows. Use the tools to test datasets, scan job descriptions, and run counterfactual simulations.</p>
+
+                        <h3 style="margin-top:12px;">Real-World Issues We Help With</h3>
+                        <ul id="real-issues-list" style="margin-top:8px;">
+                            <li class="issue-item" data-issue="gender-pay">Gender pay gaps and biased hiring shortlists</li>
+                            <li class="issue-item" data-issue="loan-disparity">Loan approval disparities across neighborhoods</li>
+                            <li class="issue-item" data-issue="healthcare-access">Healthcare triage models disadvantaging minorities</li>
+                            <li class="issue-item" data-issue="admissions-bias">University admissions favoring legacy applicants</li>
+                        </ul>
+                        <div id="issue-detail" style="margin-top:12px;color:var(--text-muted);display:none;padding:12px;border-radius:8px;border:1px solid var(--border-color);background:var(--surface-alt)"></div>
+                    </div>
+
+                    <div class="panel mt-4" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+                        <div>
+                            <h3>Explore Modes</h3>
+                            <p class="text-sm text-muted">Jump directly to the tool you want to try.</p>
+                        </div>
+                        <div style="display:flex;gap:12px;">
+                            <button class="btn btn-primary" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">Mode 1: Dataset Analyzer</button>
+                            <button class="btn btn-outline" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">Mode 2: JD Scanner</button>
+                            <button class="btn btn-outline" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">Mode 3: Profile Simulator</button>
+                        </div>
+                    </div>
+
                     </div>
                 </section>
 
@@ -168,16 +246,11 @@
                                 <div class="stat-card">
                                     <h3 class="mb-2">Overall Bias Score</h3>
                                     <div class="score-display">
-                                        <div class="score-circle score-high">--</div>
+                                        <div class="score-circle score-high">74</div>
                                         <div class="score-details">
                                             <p>Scale: 0 (Fair) to 100 (Unfair)</p>
-                                            <strong>Awaiting Analysis</strong>
+                                            <strong>Significant disparate impact found on attribute: Gender.</strong>
                                         </div>
-                                    </div>
-                                    
-                                    <h3 class="mt-4 mb-2">Feature Importance (XAI)</h3>
-                                    <div id="feature-importance-chart" class="mt-3">
-                                        <p class="text-muted">Run analysis to see top driving factors...</p>
                                     </div>
                                 </div>
                                 <div class="stat-card">
@@ -195,14 +268,6 @@
                                         </div>
                                     </div>
                                     <p class="mt-3 text-sm text-muted">Rule of thumb: Ratio should be > 80% (Currently ~37%).</p>
-                                </div>
-                            </div>
-
-                            <!-- AI Audit Report Panel -->
-                            <div class="panel mt-4 ai-report-panel" id="ai-report-panel" style="display: none; border-left: 4px solid var(--primary-color);">
-                                <h2 style="color: var(--primary-color);"><i class="ph-fill ph-sparkle"></i> AI Bias Audit Report</h2>
-                                <div id="ai-report-content" class="markdown-content mt-3" style="line-height: 1.6; color: var(--text-color);">
-                                    <!-- Report goes here -->
                                 </div>
                             </div>
 
@@ -250,26 +315,54 @@
                     </div>
                 </section>
 
-                <!-- JD Scanner View -->
+                <!-- Bias Language Analyzer View -->
                 <section id="jd-scanner" class="view-section">
                     <div class="dashboard-grid mb-4">
                         <div class="panel" style="grid-column: span 2;">
                             <div class="panel-header">
-                                <h2>Job Description Scanner</h2>
-                                <p>Paste job description text to identify and rewrite exclusionary or biased language.</p>
+                                <h2>Bias Language Analyzer</h2>
+                                <p>Analyze any decision-influencing text for exclusionary or biased language across multiple domains.</p>
+                            </div>
+                            <div class="form-row mt-3">
+                                <div class="form-group" style="flex: 1;">
+                                    <label>Domain</label>
+                                    <select id="analyzer-domain" class="form-control">
+                                        <option value="Hiring">Hiring (Job Descriptions)</option>
+                                        <option value="Finance">Finance (Loan Policies)</option>
+                                        <option value="Healthcare">Healthcare (Guidelines/Notes)</option>
+                                        <option value="Education">Education (Admission Policies)</option>
+                                        <option value="General">General Forms/Policies</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="flex: 2;">
+                                    <label>Role or Policy Context (Optional)</label>
+                                    <input type="text" id="analyzer-context" class="form-control" placeholder="e.g. Requires lifting 50lbs, must work night shift...">
+                                </div>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="checkbox" id="analyzer-allow-physical">
+                                    <span>Allow Physical Constraints</span>
+                                </label>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea id="jd-input" class="form-control" rows="8" placeholder="Paste job description here... E.g., We are looking for aggressive, rockstar developers to dominate the market..."></textarea>
+                                <textarea id="jd-input" class="form-control" rows="8" placeholder="Paste document text here..."></textarea>
                             </div>
-                            <button class="btn btn-primary w-100" id="scan-jd-btn"><i class="ph ph-magnifying-glass"></i> Scan Document</button>
+                            <button class="btn btn-primary w-100" id="scan-jd-btn"><i class="ph ph-magnifying-glass"></i> Analyze Language</button>
                         </div>
                         <div class="panel" id="jd-summary-panel">
                             <h2>Scan Summary</h2>
+                            <div style="margin-top:8px;">
+                                <span id="llm-badge" class="badge" style="padding:6px 10px; font-size:0.8rem;">LLM: Unknown</span>
+                            </div>
                             <div class="score-display mt-4">
                                 <div class="score-circle" id="jd-score-circle">--</div>
                                 <div class="score-details">
                                     <p>Bias Score</p>
                                     <strong id="jd-risk-level">Awaiting Scan</strong>
+                                    <div style="font-size:0.9rem; margin-top:6px; color:var(--text-muted);">
+                                        Significance: <span id="jd-significance">--</span>% · Confidence: <span id="jd-confidence">--</span>%
+                                    </div>
                                 </div>
                             </div>
                             <ul class="bias-breakdown mt-4">
@@ -289,15 +382,21 @@
                     </div>
 
                     <div id="jd-results" class="panel hidden">
-                        <h2>Detected Issues & Suggestions</h2>
-                        <div class="jd-result-container">
-                            <div class="jd-highlighted-text" id="jd-output">
-                                <!-- Text will be inserted here -->
+                        <h2>Analysis Results & Auto-Mitigation</h2>
+                        <div id="analyzer-notes-container" class="mt-2 mb-4"></div>
+                        
+                        <div class="jd-result-container" style="display: flex; flex-direction: column; gap: 24px;">
+                            <div class="issues-list-container">
+                                <h3>Flagged Issues</h3>
+                                <div id="issues-list" class="suggestions-list" style="display: grid; gap: 12px; margin-top: 12px;">
+                                    <!-- Issues will be populated here -->
+                                </div>
                             </div>
-                            <div class="jd-suggestions">
-                                <h3>Actionable Insights</h3>
-                                <div id="suggestions-list" class="suggestions-list">
-                                    <!-- Suggestions will be populated here -->
+                            <div class="mitigated-text-container" style="background: var(--surface-alt); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                                <h3><i class="ph-duotone ph-magic-wand" style="color: var(--primary-color);"></i> Auto-Mitigated Text</h3>
+                                <p class="text-sm text-muted mb-3">Revised version preserving intent while using inclusive language.</p>
+                                <div id="rewritten-text-output" style="font-family: var(--font-body); line-height: 1.6; white-space: pre-wrap;">
+                                    <!-- Rewritten text will be inserted here -->
                                 </div>
                             </div>
                         </div>
@@ -360,8 +459,8 @@
                                     <div class="form-group">
                                         <label>Age group (Original)</label>
                                         <select class="form-control" id="sim-age">
-                                            <option value="> 50">&gt; 50</option>
-                                            <option value="< 30">&lt; 30</option>
+                                            <option value=">50">&gt; 50</option>
+                                            <option value="<30">&lt; 30</option>
                                             <option value="30-50">30-50</option>
                                         </select>
                                     </div>
@@ -395,23 +494,6 @@
                                             <strong>Severe Bias Impact Detected</strong>
                                             <p>Changing the profile's gender from <span id="exp-orig">Female</span> to <span id="exp-cf">Male</span> while keeping all other qualifications identical resulted in a <strong>+44%</strong> increase in approval probability.</p>
                                         </div>
-                                    </div>
-                                </div>
-                                
-                                <hr class="divider">
-                                
-                                <div class="mt-4">
-                                    <h3 class="mb-3"><i class="ph-fill ph-sparkle" style="color: var(--primary-color);"></i> AI Personalized Explanation</h3>
-                                    <div class="panel" style="background-color: var(--card-bg); border-left: 4px solid var(--primary-color);">
-                                        <p id="sim-ai-explanation" class="mb-0 text-muted" style="line-height: 1.6;">Run simulation to view AI analysis...</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-4">
-                                    <h3 class="mb-3">The "What-If" Matrix</h3>
-                                    <p class="text-muted small">Holding Experience and Education constant, here is how the algorithmic probability shifts across all demographic combinations for this exact candidate:</p>
-                                    <div id="sim-whatif-matrix" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px;">
-                                        <!-- Matrix injected by JS -->
                                     </div>
                                 </div>
                             </div>

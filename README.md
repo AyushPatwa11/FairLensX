@@ -33,6 +33,8 @@ FairLens AI is a full-stack web application designed to detect, analyze, and mit
   - HTML5 & Vanilla JavaScript
   - Modern, dynamic UI with Vanilla CSS (Dark mode optimized, glassmorphism, Phosphor icons)
   - Hosted locally via Python's built-in `http.server`
+
+      Note: The dashboard supports a fullscreen video wallpaper. To enable it locally, place a hero video at `assets/hero.mp4` (MP4, H.264) and an optional poster image at `assets/hero.jpg`. If no video is provided the site will gracefully fall back to a static theme.
 - **Backend:**
   - Python 3
   - FastAPI framework

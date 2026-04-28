@@ -4,14 +4,13 @@ import requests
 
 # Prefer full model resource names as returned by the ListModels API
 MODEL_CANDIDATES = [
-    # Keep candidates in priority order exactly as reported by ListModels
+    "models/gemini-2.0-flash",
+    "models/gemini-2.0-flash-lite",
     "models/gemini-2.5-flash",
     "models/gemini-2.5-pro",
     "models/gemini-2.5-flash-lite",
-    "models/gemini-2.0-flash",
     "models/gemini-2.0-flash-001",
     "models/gemini-2.0-flash-lite-001",
-    "models/gemini-2.0-flash-lite",
 ]
 
 
@@ -131,9 +130,9 @@ class GenAIWrapper:
         raise RuntimeError("No LLM candidates configured")
 
 
-def get_llm_wrapper(temperature=0.2):
+def get_llm_wrapper(temperature=0.2, max_output_tokens=4096):
     # Load API key from environment if present; assume .env is loaded elsewhere
     key = os.getenv("GOOGLE_API_KEY")
     if not key or key == "your_gemini_api_key_here":
         return None
-    return GenAIWrapper(temperature=temperature)
+    return GenAIWrapper(temperature=temperature, max_output_tokens=max_output_tokens)
