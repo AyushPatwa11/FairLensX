@@ -634,4 +634,16 @@ document.addEventListener('DOMContentLoaded', () => {
     chatbotInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') chatbotSend.click();
     });
+    // Darken background video when scrolling past hero so "About / Stats" appears on a dark backdrop
+    const bgOverlay = document.querySelector('.bg-overlay');
+    const heroSection = document.querySelector('.dashboard-hero-section');
+    function handleHeroScroll() {
+        if (!bgOverlay || !heroSection) return;
+        const threshold = Math.max(120, heroSection.offsetHeight - 120);
+        if (window.scrollY > threshold) bgOverlay.classList.add('dimmed');
+        else bgOverlay.classList.remove('dimmed');
+    }
+    window.addEventListener('scroll', handleHeroScroll, { passive: true });
+    // run once to ensure correct initial state (in case user navigated)
+    setTimeout(handleHeroScroll, 50);
 });

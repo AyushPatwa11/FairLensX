@@ -18,6 +18,7 @@
         <source src="AI_neural_network_202604282109.mp4" type="video/mp4">
     </video>
     <div class="bg-overlay"></div>
+    <div class="scroll-dark-overlay" id="scroll-dark-overlay"></div>
 
     <div class="app-container">
         <!-- Sidebar Navigation -->
@@ -68,7 +69,7 @@
                 <section id="dashboard" class="view-section active">
                     <!-- Dashboard Hero -->
                     <div class="dashboard-hero-section">
-                        <div class="badge-pill">FairLens AI</div>
+                        <div class="badge-pill">GOVERNANCE 2.0</div>
                         <h1>Precision Auditing for the AI Era</h1>
                         <p>The world's first comprehensive governance suite designed to identify, simulate, and mitigate algorithmic bias at the microscopic level.</p>
                         <div class="hero-buttons">
@@ -77,119 +78,91 @@
                         </div>
                     </div>
 
-                    <div class="dashboard-dark-bg">
+                    <div class="dashboard-dark-bg" id="dashboard-dark-bg">
 
+                        <!-- About / Stats Section -->
+                        <div class="about-section-header">
+                            <h2 class="section-label">System Overview</h2>
+                            <p class="text-muted">Live metrics across all active fairness auditing pipelines.</p>
+                        </div>
 
+                        <div class="dashboard-grid">
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>Overall System Bias</h3>
+                                    <div class="icon-wrapper bg-warning"><i class="ph ph-warning-circle"></i></div>
+                                </div>
+                                <div class="stat-value">28<span class="stat-unit">/100</span></div>
+                                <div class="stat-trend negative"><i class="ph ph-trend-up"></i> +4% from last month</div>
+                                <div class="stat-desc">Moderate risk detected across active models.</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>Datasets Analyzed</h3>
+                                    <div class="icon-wrapper bg-primary"><i class="ph ph-database"></i></div>
+                                </div>
+                                <div class="stat-value">12</div>
+                                <div class="stat-trend positive"><i class="ph ph-trend-up"></i> +2 this week</div>
+                                <div class="stat-desc">Latest: Q3_Hiring_Data.csv</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-header">
+                                    <h3>JDs Scanned (30d)</h3>
+                                    <div class="icon-wrapper bg-success"><i class="ph ph-file-magnifying-glass"></i></div>
+                                </div>
+                                <div class="stat-value">45</div>
+                                <div class="stat-trend positive"><i class="ph ph-check-circle"></i> 82% Fair</div>
+                                <div class="stat-desc">Average bias score: 14/100 (Low Risk)</div>
+                            </div>
+                        </div>
+
+                        <!-- Modular Intelligence Section -->
                         <div class="modular-section panel">
-                        <h2 style="margin-bottom:8px;">Modular Intelligence</h2>
-                        <p class="text-muted">A modular audit suite: pick the entry point that fits your workflow.</p>
-                        <div class="modes-grid">
-                            <div class="mode-card">
-                                <i class="ph ph-database"></i>
-                                <h4>Dataset Analyzer</h4>
-                                <p>Scrutinize training data before deployment. Identify hidden correlations and underrepresented demographics.</p>
-                                <a class="explore" href="#" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click();return false;">Explore Mode →</a>
-                            </div>
-                            <div class="mode-card">
-                                <i class="ph ph-file-text"></i>
-                                <h4>Language Analyzer</h4>
-                                <p>Detect harmful or exclusionary language in job descriptions and policies. Get inclusive rewrites.</p>
-                                <a class="explore" href="#" onclick="document.querySelector('[data-target=\'jd-scanner\']').click();return false;">Explore Mode →</a>
-                            </div>
-                            <div class="mode-card">
-                                <i class="ph ph-users"></i>
-                                <h4>Bias Simulator</h4>
-                                <p>Stress-test models with counterfactual profiles and adversarial scenarios to surface long-term impacts.</p>
-                                <a class="explore" href="#" onclick="document.querySelector('[data-target=\'profile-simulator\']').click();return false;">Explore Mode →</a>
+                            <h2 style="margin-bottom:8px;">Modular Intelligence</h2>
+                            <p class="text-muted">A modular audit suite: pick the entry point that fits your workflow.</p>
+                            <div class="modes-grid">
+                                <div class="mode-card">
+                                    <i class="ph ph-database"></i>
+                                    <h4>Dataset Analyzer</h4>
+                                    <p>Scrutinize training data before deployment. Identify hidden correlations and underrepresented demographics.</p>
+                                    <a class="explore" href="#" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click();return false;">Explore Mode →</a>
+                                </div>
+                                <div class="mode-card">
+                                    <i class="ph ph-file-text"></i>
+                                    <h4>Language Analyzer</h4>
+                                    <p>Detect harmful or exclusionary language in job descriptions and policies. Get inclusive rewrites.</p>
+                                    <a class="explore" href="#" onclick="document.querySelector('[data-target=\'jd-scanner\']').click();return false;">Explore Mode →</a>
+                                </div>
+                                <div class="mode-card">
+                                    <i class="ph ph-users"></i>
+                                    <h4>Bias Simulator</h4>
+                                    <p>Stress-test models with counterfactual profiles and adversarial scenarios to surface long-term impacts.</p>
+                                    <a class="explore" href="#" onclick="document.querySelector('[data-target=\'profile-simulator\']').click();return false;">Explore Mode →</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="panel ready-cta">
-                        <h2>Ready to Audit Your Systems?</h2>
-                        <p class="text-muted">Choose your entry point and start securing your enterprise intelligence today.</p>
-                        <div class="cta-grid">
-                            <button class="btn cta-btn" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">Analyze Data</button>
-                            <button class="btn cta-btn secondary" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">Analyze Language</button>
-                            <button class="btn cta-btn" style="background:linear-gradient(90deg,var(--primary-color),var(--primary-hover));color:#071024;" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">Simulate Bias</button>
-                        </div>
-                    </div>
-                    <div class="dashboard-grid">
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <h3>Overall System Bias</h3>
-                                <div class="icon-wrapper bg-warning"><i class="ph ph-warning-circle"></i></div>
-                            </div>
-                            <div class="stat-value">28<span class="stat-unit">/100</span></div>
-                            <div class="stat-trend negative"><i class="ph ph-trend-up"></i> +4% from last month</div>
-                            <div class="stat-desc">Moderate risk detected across active models.</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <h3>Datasets Analyzed</h3>
-                                <div class="icon-wrapper bg-primary"><i class="ph ph-database"></i></div>
-                            </div>
-                            <div class="stat-value">12</div>
-                            <div class="stat-trend positive"><i class="ph ph-trend-up"></i> +2 this week</div>
-                            <div class="stat-desc">Latest: Q3_Hiring_Data.csv</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <h3>JDs Scanned (30d)</h3>
-                                <div class="icon-wrapper bg-success"><i class="ph ph-file-magnifying-glass"></i></div>
-                            </div>
-                            <div class="stat-value">45</div>
-                            <div class="stat-trend positive"><i class="ph ph-check-circle"></i> 82% Fair</div>
-                            <div class="stat-desc">Average bias score: 14/100 (Low Risk)</div>
-                        </div>
-                    </div>
-
-                    <div class="quick-actions">
-                        <h2>Quick Actions</h2>
-                        <div class="action-cards">
-                            <div class="action-card" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">
-                                <i class="ph-duotone ph-upload-simple"></i>
-                                <h4>New Dataset Analysis</h4>
-                                <p>Upload a CSV to evaluate model fairness metrics.</p>
-                            </div>
-                            <div class="action-card" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">
-                                <i class="ph-duotone ph-text-aa"></i>
-                                <h4>Bias Language Analyzer</h4>
-                                <p>Detect hidden bias in policies or hiring material.</p>
-                            </div>
-                            <div class="action-card" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">
-                                <i class="ph-duotone ph-git-diff"></i>
-                                <h4>Simulate Counterfactuals</h4>
-                                <p>Test individual profiles against decision models.</p>
+                        <!-- Quick Actions Section -->
+                        <div class="quick-actions">
+                            <h2>Quick Actions</h2>
+                            <div class="action-cards">
+                                <div class="action-card" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">
+                                    <i class="ph-duotone ph-upload-simple"></i>
+                                    <h4>New Dataset Analysis</h4>
+                                    <p>Upload a CSV to evaluate model fairness metrics.</p>
+                                </div>
+                                <div class="action-card" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">
+                                    <i class="ph-duotone ph-text-aa"></i>
+                                    <h4>Bias Language Analyzer</h4>
+                                    <p>Detect hidden bias in policies or hiring material.</p>
+                                </div>
+                                <div class="action-card" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">
+                                    <i class="ph-duotone ph-git-diff"></i>
+                                    <h4>Simulate Counterfactuals</h4>
+                                    <p>Test individual profiles against decision models.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="panel mt-4">
-                        <h2>About FairLens</h2>
-                        <p>FairLens AI helps teams identify and mitigate algorithmic bias across hiring, lending, and healthcare workflows. Use the tools to test datasets, scan job descriptions, and run counterfactual simulations.</p>
-
-                        <h3 style="margin-top:12px;">Real-World Issues We Help With</h3>
-                        <ul id="real-issues-list" style="margin-top:8px;">
-                            <li class="issue-item" data-issue="gender-pay">Gender pay gaps and biased hiring shortlists</li>
-                            <li class="issue-item" data-issue="loan-disparity">Loan approval disparities across neighborhoods</li>
-                            <li class="issue-item" data-issue="healthcare-access">Healthcare triage models disadvantaging minorities</li>
-                            <li class="issue-item" data-issue="admissions-bias">University admissions favoring legacy applicants</li>
-                        </ul>
-                        <div id="issue-detail" style="margin-top:12px;color:var(--text-muted);display:none;padding:12px;border-radius:8px;border:1px solid var(--border-color);background:var(--surface-alt)"></div>
-                    </div>
-
-                    <div class="panel mt-4" style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
-                        <div>
-                            <h3>Explore Modes</h3>
-                            <p class="text-sm text-muted">Jump directly to the tool you want to try.</p>
-                        </div>
-                        <div style="display:flex;gap:12px;">
-                            <button class="btn btn-primary" onclick="document.querySelector('[data-target=\'dataset-analyzer\']').click()">Mode 1: Dataset Analyzer</button>
-                            <button class="btn btn-outline" onclick="document.querySelector('[data-target=\'jd-scanner\']').click()">Mode 2: JD Scanner</button>
-                            <button class="btn btn-outline" onclick="document.querySelector('[data-target=\'profile-simulator\']').click()">Mode 3: Profile Simulator</button>
-                        </div>
-                    </div>
 
                     </div>
                 </section>
