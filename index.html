@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>FairLens AI - Intelligent Bias Detection</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,15 +13,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=14">
 </head>
 <body>
     <!-- Global Background Video for Dashboard -->
     <video class="bg-video" id="bg-video" autoplay muted loop playsinline>
-        <source src="AI_neural_network_202604282109.mp4" type="video/mp4">
+        <source src="Video_Editing_Text_Removal_and_Extension.mp4" type="video/mp4">
     </video>
     <div class="bg-overlay"></div>
     <div class="scroll-dark-overlay" id="scroll-dark-overlay"></div>
+
+    <!-- Hero overlay — inside scroll container so it scrolls with the page -->
 
     <div class="app-container">
         <!-- Sidebar Navigation -->
@@ -67,16 +72,17 @@
             <div class="content-wrapper">
                 <!-- Dashboard View -->
                 <section id="dashboard" class="view-section active">
-                    <!-- Dashboard Hero -->
-                    <div class="dashboard-hero-section">
+                    <!-- Hero section: 100vh block that scrolls with the page -->
+                    <div id="dashboard-hero" style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;box-sizing:border-box;">
                         <div class="badge-pill">GOVERNANCE 2.0</div>
-                        <h1>Precision Auditing for the AI Era</h1>
-                        <p>The world's first comprehensive governance suite designed to identify, simulate, and mitigate algorithmic bias at the microscopic level.</p>
-                        <div class="hero-buttons">
-                            <button class="btn btn-hero-primary" onclick="document.querySelector('.dashboard-dark-bg').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+                        <h1 class="hero-headline">Precision Auditing for the AI Era</h1>
+                        <p class="hero-sub">The world's first comprehensive governance suite designed to identify,<br>simulate, and mitigate algorithmic bias at the microscopic level.</p>
+                        <div style="display:flex;gap:16px;justify-content:center;align-items:center;margin-top:4px;">
+                            <button class="btn btn-hero-primary" onclick="document.querySelector('.main-content').scrollTo({top:window.innerHeight,behavior:'smooth'})">Get Started</button>
                             <button class="btn btn-hero-secondary"><i class="ph-fill ph-play-circle"></i> View Demo</button>
                         </div>
                     </div>
+
 
                     <div class="dashboard-dark-bg" id="dashboard-dark-bg">
 
@@ -497,7 +503,7 @@
         </div>
     </div>
 
-    <script src="config.js?v=2"></script>
-    <script src="script.js?v=2"></script>
+    <script src="config.js?v=12"></script>
+    <script src="script.js?v=12"></script>
 </body>
 </html>

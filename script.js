@@ -27,6 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
         'profile-simulator': 'Individual Bias Simulator'
     };
 
+
+
+    // ── Hero visibility management ────────────────────────────────
+    const dashHero = document.getElementById('dashboard-hero');
+    const bgVidEl  = document.getElementById('bg-video');
+    const sdOverlay = document.getElementById('scroll-dark-overlay');
+
+    function showHero() {
+        if (dashHero) dashHero.style.display = 'flex';
+        if (bgVidEl)  bgVidEl.style.opacity  = '1';
+        if (sdOverlay) sdOverlay.style.background = 'rgba(5,7,12,0)';
+    }
+    function hideHero() {
+        if (dashHero) dashHero.style.display = 'none';
+    }
+    // ────────────────────────────────────────────────────────────
+
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             // Remove active class from all
@@ -41,8 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // Hide sidebar for the dashboard hero view to create a full-bleed landing
             const appContainer = document.querySelector('.app-container');
             if (appContainer) {
-                if (targetId === 'dashboard') appContainer.classList.add('hero-landing');
-                else appContainer.classList.remove('hero-landing');
+                if (targetId === 'dashboard') {
+                    appContainer.classList.add('hero-landing');
+                    showHero();
+                    // Scroll main-content back to top so hero is visible
+                    const mc = document.querySelector('.main-content');
+                    if (mc) mc.scrollTop = 0;
+                } else {
+                    appContainer.classList.remove('hero-landing');
+                    hideHero();
+                }
             }
         });
     });
@@ -52,8 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const appContainerInit = document.querySelector('.app-container');
     if (initialActive && appContainerInit) {
         const tgt = initialActive.getAttribute('data-target');
-        if (tgt === 'dashboard') appContainerInit.classList.add('hero-landing');
+        if (tgt === 'dashboard') {
+            appContainerInit.classList.add('hero-landing');
+            showHero();
+        } else {
+            hideHero();
+        }
     }
+
+
+
 
     // -------------------------------------------------------------
     // MODE 1: Dataset Analyzer
@@ -635,23 +668,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') chatbotSend.click();
     });
     // Darken background video when scrolling past hero so stats/about section appears on a dark backdrop
-    const scrollDarkOverlay = document.getElementById('scroll-dark-overlay');
     const mainContent = document.querySelector('.main-content');
 
     function handleHeroScroll() {
-        const heroSec = document.querySelector('.dashboard-hero-section');
-        if (!scrollDarkOverlay || !mainContent || !heroSec) return;
+        // Only apply darkening effect on the dashboard view
+        if (!document.getElementById('dashboard').classList.contains('active')) return;
+        const heroSec = document.getElementById('dashboard-hero');
+        if (!sdOverlay || !mainContent || !heroSec) return;
         const scrollTop = mainContent.scrollTop;
-        const heroHeight = heroSec.offsetHeight;
-        // Start darkening after 30% of the hero, reach full darkness at 80%
-        const start = heroHeight * 0.3;
-        const end   = heroHeight * 0.8;
+        const heroHeight = window.innerHeight; // hero is fixed at full viewport
+        // Start darkening after 20% scroll, fully dark at 70%
+        const start = heroHeight * 0.2;
+        const end   = heroHeight * 0.7;
         const progress = Math.min(1, Math.max(0, (scrollTop - start) / (end - start)));
         const opacity = Math.round(progress * 100) / 100;
-        scrollDarkOverlay.style.background = `rgba(5, 7, 12, ${opacity * 0.85})`;
+        sdOverlay.style.background = `rgba(5, 7, 12, ${opacity * 0.9})`;
         // Also slightly dim the bg-video brightness for extra depth
-        const bgVid = document.getElementById('bg-video');
-        if (bgVid) bgVid.style.opacity = 1 - progress * 0.6;
+        if (bgVidEl) bgVidEl.style.opacity = 1 - progress * 0.65;
     }
 
     if (mainContent) {
@@ -661,3 +694,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleHeroScroll, { passive: true });
     setTimeout(handleHeroScroll, 50);
 });
+
