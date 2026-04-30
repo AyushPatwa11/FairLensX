@@ -634,16 +634,30 @@ document.addEventListener('DOMContentLoaded', () => {
     chatbotInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') chatbotSend.click();
     });
-    // Darken background video when scrolling past hero so "About / Stats" appears on a dark backdrop
-    const bgOverlay = document.querySelector('.bg-overlay');
-    const heroSection = document.querySelector('.dashboard-hero-section');
+    // Darken background video when scrolling past hero so stats/about section appears on a dark backdrop
+    const scrollDarkOverlay = document.getElementById('scroll-dark-overlay');
+    const mainContent = document.querySelector('.main-content');
+
     function handleHeroScroll() {
-        if (!bgOverlay || !heroSection) return;
-        const threshold = Math.max(120, heroSection.offsetHeight - 120);
-        if (window.scrollY > threshold) bgOverlay.classList.add('dimmed');
-        else bgOverlay.classList.remove('dimmed');
+        const heroSec = document.querySelector('.dashboard-hero-section');
+        if (!scrollDarkOverlay || !mainContent || !heroSec) return;
+        const scrollTop = mainContent.scrollTop;
+        const heroHeight = heroSec.offsetHeight;
+        // Start darkening after 30% of the hero, reach full darkness at 80%
+        const start = heroHeight * 0.3;
+        const end   = heroHeight * 0.8;
+        const progress = Math.min(1, Math.max(0, (scrollTop - start) / (end - start)));
+        const opacity = Math.round(progress * 100) / 100;
+        scrollDarkOverlay.style.background = `rgba(5, 7, 12, ${opacity * 0.85})`;
+        // Also slightly dim the bg-video brightness for extra depth
+        const bgVid = document.getElementById('bg-video');
+        if (bgVid) bgVid.style.opacity = 1 - progress * 0.6;
     }
+
+    if (mainContent) {
+        mainContent.addEventListener('scroll', handleHeroScroll, { passive: true });
+    }
+    // Also listen on window for edge cases
     window.addEventListener('scroll', handleHeroScroll, { passive: true });
-    // run once to ensure correct initial state (in case user navigated)
     setTimeout(handleHeroScroll, 50);
 });
