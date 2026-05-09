@@ -1,0 +1,29 @@
+{
+  "name": "fairlens-ai-frontend",
+  "version": "3.0.0",
+  "private": true,
+  "description": "FairLens AI - Enterprise Bias Auditing Platform",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "axios": "^1.6.0",
+    "papaparse": "^5.4.1",
+    "recharts": "^2.10.0",
+    "react-dropzone": "^14.2.3",
+    "framer-motion": "^10.18.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "scripts": {
+    "start": "cross-env REACT_APP_API_URL=http://localhost:8000 react-scripts start",
+    "build": "react-scripts build",
+    "test":  "react-scripts test --watchAll=false"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead"],
+    "development": ["last 1 chrome version"]
+  },
+  "proxy": "http://localhost:8000"
+}

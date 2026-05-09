@@ -1,0 +1,5 @@
+﻿id,gender,race,age,education,experience,gpa,hired
+1,Male,White,28,Bachelors,5,3.5,1
+2,Female,Black,26,Bachelors,3,3.6,0
+3,Male,White,35,Masters,10,3.8,1
+4,Female,Hispanic,30,Bachelors,6,3.2,0
