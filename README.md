@@ -6,7 +6,6 @@
 
  The platform helps organizations identify unfair or discriminatory behavior in systems used for:
  
- 
  * Hiring & Recruitment
  * Loan & Financial Approval
  * Healthcare Decision Systems
