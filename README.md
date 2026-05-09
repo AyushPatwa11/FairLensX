@@ -5,7 +5,8 @@
  **FairLens AI** is a multi-domain AI fairness auditing platform designed to detect, analyze, visualize, and mitigate bias in AI-driven decision systems.
 
  The platform helps organizations identify unfair or discriminatory behavior in systems used for:
-
+ 
+ 
  * Hiring & Recruitment
  * Loan & Financial Approval
  * Healthcare Decision Systems
