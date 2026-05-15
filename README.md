@@ -1,4 +1,4 @@
- # FairLens AI — README
+ ## FairLens AI — README
 
  ## 🚀 Overview
 
